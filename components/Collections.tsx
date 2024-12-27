@@ -1,14 +1,25 @@
-import React from 'react'
+"use client"
+import { useState } from 'react';
+import CollectionSort from './CollectionSort';
 
-const Collections = () => {
+const CollectionsPage = () => {
+  const [activeSort, setActiveSort] = useState('all');
+
+  const handleSort = (sortType) => {
+    setActiveSort(sortType);
+    // Add your sorting logic here
+  };
+
   return (
-    <div>
-          <div>collections</div>
-        <div>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis iure repellendus aliquam quos error, quidem reiciendis. Dolore at repudiandae cum aliquam numquam. Autem saepe sint totam molestiae porro iusto laborum.
-        </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-white mb-4">Collections</h1>
+        <CollectionSort onSort={handleSort} activeSort={activeSort} />
+      </div>
+      
+      {/* Your collections grid/list will go here */}
     </div>
-  )
-}
+  );
+};
 
-export default Collections;
+export default CollectionsPage;
