@@ -1,22 +1,19 @@
-'use client'
+'use client';
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
+import { PT_Mono } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ApolloProvider, ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import {
+    ApolloProvider,
+    ApolloClient,
+    InMemoryCache,
+    gql,
+} from '@apollo/client';
 
-
-const geistSans = localFont({
-    src: "./fonts/GeistVF.woff",
-    variable: "--font-geist-sans",
-    weight: "100 900",
-});
-
-const geistMono = localFont({
-    src: "./fonts/GeistMonoVF.woff",
-    variable: "--font-geist-mono",
-    weight: "100 900",
+const PT_Mono_ = PT_Mono({
+    subsets: ['latin'],
+    weight: ['400'],
 });
 
 const cache = new InMemoryCache({
@@ -26,24 +23,23 @@ const cache = new InMemoryCache({
                 clients: {
                     merge(existing, incoming) {
                         return incoming;
-                    }
+                    },
                 },
                 projects: {
                     merge(existing, incoming) {
                         return incoming;
-                    }
-                }
-            }
-        }
-    }
-})
+                    },
+                },
+            },
+        },
+    },
+});
 
 const client = new ApolloClient({
     // ssrMode: typeof window === "undefined",
-    uri: "http://localhost:5000/graphql",
-    cache
+    uri: 'http://localhost:5000/graphql',
+    cache,
 });
-
 
 const metadata: Metadata = {
     title: 'Create Next App',
@@ -58,19 +54,25 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden text-sm`}
+                className={`${PT_Mono_.className} antialiased overflow-x-hidden text-sm`}
             >
-                <ApolloProvider client={client} >
+                <div className="min-h-screen relative bg-black">
+                
+                
+               
+                        {/* <div className="relative z-10 p-6"></div> */}
 
-                    {/* <Header /> */}
-                    <div className="min-h-screen max-w-5xl mx-auto space-y-8 px-5 py-14 lg:px-10">
-                        {children}
-                    </div>
-                    {/* <Footer /> */}
-                </ApolloProvider>
+                        <ApolloProvider client={client}>
+                            
+                            <Header />
+                            <div className="min-h-screen max-w-6xl mx-auto space-y-8 px-5 py-14 lg:px-10">
+                                {children}
+                            </div>
+                            <Footer />
 
+                        </ApolloProvider>
+                        </div>
             </body>
         </html>
     );
 }
-
