@@ -1,8 +1,10 @@
+
 import React from 'react';
-import { collections } from '../../../data/sampleCollections';
-import { CollectionHeader } from '../../../components/CollectionHeader';
-import { CollectionStats } from '../../../components/CollectionStats';
-import { CollectionDescription } from '../../../components/CollectionDescription';
+import { collections } from '@/data/sampleCollections';
+import { CollectionHeader } from '@/components/CollectionHeader';
+import { CollectionStats } from '@/components/CollectionStats';
+import { CollectionDescription } from '@/components/CollectionDescription';
+import { MintButton } from '@/components/MintButton';
 
 const page: React.FC = () => {
   const contractAddress = "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D";
@@ -30,6 +32,11 @@ const page: React.FC = () => {
         <CollectionDescription 
           description={collection.description}
         />
+         <MintButton 
+            price={collection.price} 
+            // disabled={isSoldOut || true}
+            disabled={false}
+          />
       </div>
     </div>
   );

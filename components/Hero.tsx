@@ -29,14 +29,14 @@ const Hero = () => {
             Create and mint unique digital assets with ease.
           </p>
 
-          <div className="flex justify-center gap-4 mb-8">
+          {/* <div className="flex justify-center gap-4 mb-8">
             <button className="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-zinc-100 transition-colors">
               Get Started
             </button>
             <button className="px-8 py-3 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
               Learn More
             </button>
-          </div>
+          </div> */}
 
           <div className="flex flex-col items-center">
             <p className="text-zinc-500 text-sm uppercase tracking-wider mb-3">
