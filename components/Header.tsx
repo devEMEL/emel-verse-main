@@ -7,7 +7,7 @@ import Link from 'next/link';
 const Header = () => {
 
     return(
-        <div className={`mt-6 mx-auto max-w-5xl px-5 py-6 lg:px-1`}>
+        <div className={`mt-6 mx-auto max-w-6xl px-5 py-6 lg:px-1`}>
             <nav className="flex justify-between items-center mb-8">
           <div className="flex items-center space-x-3">
             {/* <Logo /> */}

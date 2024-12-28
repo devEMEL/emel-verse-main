@@ -1,0 +1,56 @@
+import React from 'react';
+import { formatAddress } from '../utils/index';
+
+interface CollectionStatsProps {
+  contractAddress: string;
+  ownerAddress: string;
+  createdAt: string;
+  price: number;
+  mintedAmount: number;
+  totalSupply: number;
+}
+
+export const CollectionStats: React.FC<CollectionStatsProps> = ({
+  contractAddress,
+  ownerAddress,
+  createdAt,
+  price,
+  mintedAmount,
+  totalSupply
+}) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="bg-black/80 p-4 rounded-lg">
+        <h3 className="text-sm font-medium text-white/60 mb-1">Contract Address</h3>
+        <p className="text-white font-mono">{formatAddress(contractAddress)}</p>
+      </div>
+      <div className="bg-black/80 p-4 rounded-lg">
+        <h3 className="text-sm font-medium text-white/60 mb-1">Owner Address</h3>
+        <p className="text-white font-mono">{formatAddress(ownerAddress)}</p>
+      </div>
+      <div className="bg-black/80 p-4 rounded-lg">
+        <h3 className="text-sm font-medium text-white/60 mb-1">Created At</h3>
+        <p className="text-white">{new Date(createdAt).toLocaleDateString()}</p>
+      </div>
+      <div className="bg-black/80 p-4 rounded-lg">
+        <h3 className="text-sm font-medium text-white/60 mb-1">Price</h3>
+        <p className="text-white">{price} ETH</p>
+      </div>
+      <div className="bg-black/80 p-4 rounded-lg">
+        <h3 className="text-sm font-medium text-white/60 mb-1">Minted</h3>
+        <p className="text-white">
+          {mintedAmount || 0} / {totalSupply || 0}
+        </p>
+      </div>
+      <div className="bg-black/80 p-4 rounded-lg">
+        <h3 className="text-sm font-medium text-white/60 mb-1">Progress</h3>
+        <div className="w-full bg-white/20 rounded-full h-2.5">
+          <div 
+            className="bg-white h-2.5 rounded-full"
+            style={{ width: `${(mintedAmount / totalSupply) * 100}%` }}
+          ></div>
+        </div>
+      </div>
+    </div>
+  );
+};

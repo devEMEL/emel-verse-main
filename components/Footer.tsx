@@ -3,7 +3,7 @@
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-t from-black to-zinc-900/90 border-t border-zinc-800/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Main Nav */}
           <div className="space-y-4">
