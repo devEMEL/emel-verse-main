@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
     return (
         <footer className="bg-gradient-to-t from-black to-zinc-900/90 border-t border-zinc-800/30">
@@ -10,36 +12,36 @@ const Footer = () => {
                         </h3>
                         <ul className="space-y-2">
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/create"
                                     className="text-zinc-400 hover:text-white transition-colors"
                                 >
-                                    Home
-                                </a>
+                                    Create
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/"
                                     className="text-zinc-400 hover:text-white transition-colors"
                                 >
-                                    Projects
-                                </a>
+                                    Collections
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/profile"
                                     className="text-zinc-400 hover:text-white transition-colors"
                                 >
-                                    About
-                                </a>
+                                    Profile
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/faucet"
                                     className="text-zinc-400 hover:text-white transition-colors"
                                 >
-                                    Contact
-                                </a>
+                                    Faucet
+                                </Link>
                             </li>
                         </ul>
                     </div>
