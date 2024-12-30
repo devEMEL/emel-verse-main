@@ -5,14 +5,10 @@ import { useMutation, useQuery } from '@apollo/client';
 import { GET_CLIENTS } from '@/queries/clientQueries';
 import { Add_CLIENT, DELETE_CLIENT } from '@/mutations/clientMutations';
 
-
-
 const PT_Mono_ = PT_Mono({
     subsets: ['latin'],
     weight: ['400'],
 });
-
-
 
 const Clients = () => {
     const { loading, data, error } = useQuery(GET_CLIENTS);
@@ -47,9 +43,13 @@ const Clients = () => {
     return (
         <div className={`${PT_Mono_.className}`}>
             <div>Clients</div>
-            <button onClick={() => {
-            console.log("ALLOW ME TO TRY AGAIN")
-         }}>try again</button>
+            <button
+                onClick={() => {
+                    console.log('ALLOW ME TO TRY AGAIN');
+                }}
+            >
+                try again
+            </button>
             {/* <button onClick={() => addClient({variables: { name: "Henry", email: "cbcs", phone: "893939"}})}>add client</button>
         <div>
             {
@@ -67,7 +67,7 @@ const Clients = () => {
                 )
             }
         </div> */}
-            <p className='mt-2'>Hello world</p>
+            <p className="mt-2">Hello world</p>
             <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(124,58,237,0.2)] text-sm">
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non
                 quia veniam est doloremque corrupti laboriosam, iusto

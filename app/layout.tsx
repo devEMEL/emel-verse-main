@@ -57,21 +57,16 @@ export default function RootLayout({
                 className={`${PT_Mono_.className} antialiased overflow-x-hidden text-sm`}
             >
                 <div className="min-h-screen relative bg-black">
-                
-                
-               
-                        {/* <div className="relative z-10 p-6"></div> */}
+                    {/* <div className="relative z-10 p-6"></div> */}
 
-                        <ApolloProvider client={client}>
-                            
-                            <Header />
-                            <div className="min-h-screen max-w-6xl mx-auto space-y-8 px-5 py-14 lg:px-10">
-                                {children}
-                            </div>
-                            <Footer />
-
-                        </ApolloProvider>
+                    <ApolloProvider client={client}>
+                        <Header />
+                        <div className="min-h-screen max-w-6xl mx-auto space-y-8 px-5 py-14 lg:px-10">
+                            {children}
                         </div>
+                        <Footer />
+                    </ApolloProvider>
+                </div>
             </body>
         </html>
     );
