@@ -4,12 +4,15 @@ import React from 'react';
 interface MintButtonProps {
     price: number;
     disabled?: boolean;
+    openPopup: () => void;
 }
 
-export const MintButton: React.FC<MintButtonProps> = ({ price, disabled }) => {
+export const MintButton: React.FC<MintButtonProps> = ({ price, disabled, openPopup}) => {
     const handleMint = () => {
         // Mint functionality would be implemented here
         console.log('Minting NFT...');
+        //after minting
+        openPopup()
     };
 
     return (

@@ -1,4 +1,4 @@
-// 'use client';
+'use client';
 import type { Metadata } from 'next';
 import { PT_Mono } from 'next/font/google';
 import './globals.css';
@@ -10,9 +10,7 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { BrowserProvider, JsonRpcSigner } from 'ethers';
-import { useEffect, useMemo, 
-    // useState
- } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Account, Chain, Client, Transport } from 'viem';
 import { type Config, useClient, useConnectorClient } from 'wagmi';
 import { FallbackProvider, JsonRpcProvider } from 'ethers';
@@ -68,9 +66,6 @@ export function useEthersSigner({ chainId }: { chainId?: number } = {}) {
 }
 
 
-
-
-
 const PT_Mono_ = PT_Mono({
     subsets: ['latin'],
     weight: ['400'],
@@ -88,13 +83,6 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
 
-    // const [mounted, setMounted] = useState(false);
-
-    // useEffect(() => {
-    //     setMounted(true);
-    // }, []);
-
-    // if (!mounted) return null;
 
 
     return (

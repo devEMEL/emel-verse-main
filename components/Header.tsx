@@ -55,7 +55,7 @@ const Header: React.FC = () => {
                         {/* {isOpen && <ProfileDropdown className="absolute right-0 mt-10 w-48 bg-white rounded-lg shadow-xl py-2 z-10" />} */}
 
 {/* header oo */}
-                        {/* <ConnectButton showBalance={true} /> */}
+                        <ConnectButton showBalance={true} />
 
                         {/* <div
                             // href="/"
@@ -140,12 +140,14 @@ const Header: React.FC = () => {
                         {/* {isOpen && <ProfileDropdown className="w-full bg-white rounded-lg shadow-xl py-2 z-10" />} */}
 
 {/* header oo */}
+                        <ConnectButton showBalance={true} />
                         {/* <Link
                             href="/"
                             className="bg-white hover:bg-gray-100 text-black rounded-lg font-medium flex items-center space-x-2 transition-colors cursor-pointer px-3 py-2"
                         >
                             <Wallet className="w-4 h-4" />
-                            <span className="font-medium">Connect Wallet</span>
+                            <span className="font-medium">Connect Wallet</span> 
+                           
                         </Link> */}
                     </div>
                 </div>

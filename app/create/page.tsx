@@ -4,8 +4,11 @@ import React, { useState, FormEvent } from 'react';
 import { FormInput } from '@/components/forms/FormInput';
 import { FormTextArea } from '@/components/forms/FormTextArea';
 import { ImagePreview } from '@/components/forms/ImagePreview';
+import { usePopup } from '@/hooks/usePopup';
+import { SuccessPopup } from '@/components/popups/SuccessPopup';
 
 const page: React.FC = () => {
+    const { isOpen, openPopup, closePopup } = usePopup();
     const [formData, setFormData] = useState({
         name: '',
         symbol: '',
@@ -20,6 +23,8 @@ const page: React.FC = () => {
         // Handle form submission here
         console.log('Form data:', formData);
         console.log('Image file:', imageFile);
+        // after form submission
+        openPopup();
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +39,7 @@ const page: React.FC = () => {
                 <h1 className="text-2xl font-bold text-white mb-8">
                     Create New Collection
                 </h1>
-
+                <SuccessPopup isOpen={isOpen} onClose={closePopup} nftName="" imageUrl="" title='NFT Collection Created Successfully!' />
                 <form
                     onSubmit={handleSubmit}
                     className="bg-black/80 p-6 rounded-lg"
@@ -118,6 +123,7 @@ const page: React.FC = () => {
 
                     <button
                         type="submit"
+                        // onClick={handleSubmit}
                         className="w-full bg-white text-black font-bold py-3 px-6 rounded-lg hover:bg-white/90 transition-colors mt-6"
                     >
                         Create Collection

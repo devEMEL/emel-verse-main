@@ -34,9 +34,11 @@ const emel_Tanssi = {
 export const wagmiConfig = getDefaultConfig({
     appName: 'tanssi minter',
     projectId: 'cdddc2c45ee7a243f73916dfe293c0ca',
-    chains: [emel_Tanssi, sepolia],
+    chains: [
+        // emel_Tanssi
+         sepolia],
     transports: {
-        [emel_Tanssi.id]: http(),
+        // [emel_Tanssi.id]: http(),
         [sepolia.id]: http(),
     },
 });
