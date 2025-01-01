@@ -1,45 +1,81 @@
-'use client';
+// 'use client';
 import type { Metadata } from 'next';
 import { PT_Mono } from 'next/font/google';
 import './globals.css';
+import '@rainbow-me/rainbowkit/styles.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import {
-    ApolloProvider,
-    ApolloClient,
-    InMemoryCache,
-    gql,
-} from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { BrowserProvider, JsonRpcSigner } from 'ethers';
+import { useEffect, useMemo, 
+    // useState
+ } from 'react';
+import type { Account, Chain, Client, Transport } from 'viem';
+import { type Config, useClient, useConnectorClient } from 'wagmi';
+import { FallbackProvider, JsonRpcProvider } from 'ethers';
+import { client } from '@/lib/apollo';
+import { queryClient } from '@/lib/react-query';
+import { wagmiConfig } from '@/config/wagmi';
+
+export function clientToProvider(client: Client<Transport, Chain>) {
+    const { chain, transport } = client;
+    const network = {
+        chainId: chain.id,
+        name: chain.name,
+        ensAddress: chain.contracts?.ensRegistry?.address,
+    };
+    if (transport.type === 'fallback') {
+        const providers = (transport.transports as ReturnType<Transport>[]).map(
+            ({ value }) => new JsonRpcProvider(value?.url, network)
+        );
+        if (providers.length === 1) return providers[0];
+        return new FallbackProvider(providers);
+    }
+    return new JsonRpcProvider(transport.url, network);
+}
+
+/** Action to convert a viem Client to an ethers.js Provider. */
+export function useEthersProvider({ chainId }: { chainId?: number } = {}) {
+    const client = useClient<Config>({ chainId });
+    return useMemo(
+        () => (client ? clientToProvider(client) : undefined),
+        [client]
+    );
+}
+
+export function clientToSigner(client: Client<Transport, Chain, Account>) {
+    const { account, chain, transport } = client;
+    const network = {
+        chainId: chain.id,
+        name: chain.name,
+        ensAddress: chain.contracts?.ensRegistry?.address,
+    };
+    const provider = new BrowserProvider(transport, network);
+    const signer = new JsonRpcSigner(provider, account.address);
+    return signer;
+}
+
+/** Hook to convert a viem Wallet Client to an ethers.js Signer. */
+export function useEthersSigner({ chainId }: { chainId?: number } = {}) {
+    const { data: client } = useConnectorClient<Config>({ chainId });
+    return useMemo(
+        () => (client ? clientToSigner(client) : undefined),
+        [client]
+    );
+}
+
+
+
+
 
 const PT_Mono_ = PT_Mono({
     subsets: ['latin'],
     weight: ['400'],
 });
 
-const cache = new InMemoryCache({
-    typePolicies: {
-        Query: {
-            fields: {
-                clients: {
-                    merge(existing, incoming) {
-                        return incoming;
-                    },
-                },
-                projects: {
-                    merge(existing, incoming) {
-                        return incoming;
-                    },
-                },
-            },
-        },
-    },
-});
-
-const client = new ApolloClient({
-    // ssrMode: typeof window === "undefined",
-    uri: 'http://localhost:5000/graphql',
-    cache,
-});
 
 const metadata: Metadata = {
     title: 'Create Next App',
@@ -51,21 +87,36 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+
+    // const [mounted, setMounted] = useState(false);
+
+    // useEffect(() => {
+    //     setMounted(true);
+    // }, []);
+
+    // if (!mounted) return null;
+
+
     return (
         <html lang="en">
             <body
                 className={`${PT_Mono_.className} antialiased overflow-x-hidden text-sm`}
             >
-                <div className="min-h-screen relative bg-black">
-                    {/* <div className="relative z-10 p-6"></div> */}
+                <div className="relative bg-black">
 
-                    <ApolloProvider client={client}>
-                        <Header />
-                        <div className="min-h-screen max-w-6xl mx-auto space-y-8 px-5 py-14 lg:px-10">
-                            {children}
-                        </div>
-                        <Footer />
-                    </ApolloProvider>
+                    <WagmiProvider config={wagmiConfig}>
+                        <QueryClientProvider client={queryClient}>
+                            <ApolloProvider client={client}>
+                                <RainbowKitProvider >
+                                    <Header />
+                                    <div className="min-h-screen max-w-6xl mx-auto space-y-8 px-5 py-14 lg:px-10">
+                                        {children}
+                                    </div>
+                                    <Footer />
+                                </RainbowKitProvider>
+                            </ApolloProvider>
+                        </QueryClientProvider>
+                    </WagmiProvider>
                 </div>
             </body>
         </html>

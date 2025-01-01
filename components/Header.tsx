@@ -1,13 +1,19 @@
+"use client"
 import React, { useState } from 'react';
 import { Logo } from './Logo';
 import { Plus, Wallet, User, Grid } from 'lucide-react';
 import Link from 'next/link';
 import { ProfileDropdown } from './ProfileDropdown';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount } from 'wagmi';
 
 const Header: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
+
     //   const [isConnected, setIsConnected] = useState(true);
+
+    const { address, isConnected } = useAccount();
 
     return (
         <nav className="bg-black">
@@ -48,13 +54,19 @@ const Header: React.FC = () => {
 
                         {/* {isOpen && <ProfileDropdown className="absolute right-0 mt-10 w-48 bg-white rounded-lg shadow-xl py-2 z-10" />} */}
 
-                        <Link
-                            href="/"
+{/* header oo */}
+                        {/* <ConnectButton showBalance={true} /> */}
+
+                        {/* <div
+                            // href="/"
                             className="bg-white hover:bg-gray-100 text-black px-4 py-2 rounded-lg font-medium flex items-center space-x-2 transition-colors cursor-pointer"
                         >
                             <Wallet className="w-4 h-4" />
                             <span className="font-medium">Connect Wallet</span>
-                        </Link>
+                               
+                        </div> */}
+
+                        
                     </div>
 
                     {/* Mobile menu button */}
@@ -127,13 +139,14 @@ const Header: React.FC = () => {
       </button> */}
                         {/* {isOpen && <ProfileDropdown className="w-full bg-white rounded-lg shadow-xl py-2 z-10" />} */}
 
-                        <Link
+{/* header oo */}
+                        {/* <Link
                             href="/"
                             className="bg-white hover:bg-gray-100 text-black rounded-lg font-medium flex items-center space-x-2 transition-colors cursor-pointer px-3 py-2"
                         >
                             <Wallet className="w-4 h-4" />
                             <span className="font-medium">Connect Wallet</span>
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
             )}
