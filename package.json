@@ -1,6 +1,11 @@
 {
     "name": "emel-verse-main",
     "version": "0.1.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/devEMEL/emel-verse-main.git"
+    },
+    "homepage": "https://github.com/devEMEL/emel-verse-main#readme",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
