@@ -14,7 +14,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { Account, Chain, Client, Transport } from 'viem';
 import { type Config, useClient, useConnectorClient } from 'wagmi';
 import { FallbackProvider, JsonRpcProvider } from 'ethers';
-import { client } from '@/lib/apollo';
+import { client } from './api/graphql/client';
 import { queryClient } from '@/lib/react-query';
 import { wagmiConfig } from '@/config/wagmi';
 
