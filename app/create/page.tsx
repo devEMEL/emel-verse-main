@@ -7,9 +7,12 @@ import { ImagePreview } from '@/components/forms/ImagePreview';
 import { usePopup } from '@/hooks/usePopup';
 import { SuccessPopup } from '@/components/popups/SuccessPopup';
 import { etherToWei, getImageURI } from '@/utils';
+import { useErrorPopup } from '@/hooks/useErrorPopup';
+import { ErrorPopup } from '@/components/popups/ErrorPopup';
 
 const page: React.FC = () => {
     const { isOpen, openPopup, closePopup } = usePopup();
+    const { isOpen: isErrorOpen, openPopup: openErrorPopup, closePopup: closeErrorPopup } = useErrorPopup();
     const [formData, setFormData] = useState({
         name: '',
         symbol: '',
@@ -18,16 +21,19 @@ const page: React.FC = () => {
         totalSupply: '',
     });
     const [imageFile, setImageFile] = useState<File | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string>("Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit libero optio adipisci eos atque culpa corporis error eum maxime suscipit quibusdam, veritatis et laborum pariatur quod, alias in nobis magnam.");
 
-    const handleCreateCollection = async(name: string, symbol: string, description: string, price: number, totalSupply: number, imageFile: File) => {
+    const handleCreateCollection = async(name: string, symbol: string, description: string, price: bigint, totalSupply: string, imageFile: File) => {
         // Handle form submission here
         // console.log('Form data:', formData);
         // console.log('Image file:', imageFile);
+
         // use as BigInt(totalSupply)
 
         // pin to ipfs and stuffs
         const imageURI = await getImageURI(imageFile);
         // create contract obj
+        
         // make txn
         // read event log
         // make createcollection request
@@ -81,6 +87,7 @@ const page: React.FC = () => {
                 <h1 className="text-2xl font-bold text-white mb-8">
                     Create New Collection
                 </h1>
+                {/* <button onClick={openErrorPopup}>open error popup</button> */}
                 <SuccessPopup
                     isOpen={isOpen}
                     onClose={closePopup}
@@ -88,6 +95,11 @@ const page: React.FC = () => {
                     imageUrl=""
                     title="NFT Collection Created Successfully!"
                 />
+                <ErrorPopup
+                    isOpen={isErrorOpen}
+                    onClose={closeErrorPopup}
+                    message={errorMessage}
+                 />
                 <form
                     onSubmit={createCollection}
                     className="bg-black/80 p-6 rounded-lg"
