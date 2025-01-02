@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import React, { useState } from 'react';
 import { Logo } from './Logo';
 import { Plus, Wallet, User, Grid } from 'lucide-react';
@@ -54,7 +54,7 @@ const Header: React.FC = () => {
 
                         {/* {isOpen && <ProfileDropdown className="absolute right-0 mt-10 w-48 bg-white rounded-lg shadow-xl py-2 z-10" />} */}
 
-{/* header oo */}
+                        {/* header oo */}
                         <ConnectButton showBalance={true} />
 
                         {/* <div
@@ -65,8 +65,6 @@ const Header: React.FC = () => {
                             <span className="font-medium">Connect Wallet</span>
                                
                         </div> */}
-
-                        
                     </div>
 
                     {/* Mobile menu button */}
@@ -139,7 +137,7 @@ const Header: React.FC = () => {
       </button> */}
                         {/* {isOpen && <ProfileDropdown className="w-full bg-white rounded-lg shadow-xl py-2 z-10" />} */}
 
-{/* header oo */}
+                        {/* header oo */}
                         <ConnectButton showBalance={true} />
                         {/* <Link
                             href="/"

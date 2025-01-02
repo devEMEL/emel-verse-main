@@ -39,7 +39,13 @@ const page: React.FC = () => {
                 <h1 className="text-2xl font-bold text-white mb-8">
                     Create New Collection
                 </h1>
-                <SuccessPopup isOpen={isOpen} onClose={closePopup} nftName="" imageUrl="" title='NFT Collection Created Successfully!' />
+                <SuccessPopup
+                    isOpen={isOpen}
+                    onClose={closePopup}
+                    nftName=""
+                    imageUrl=""
+                    title="NFT Collection Created Successfully!"
+                />
                 <form
                     onSubmit={handleSubmit}
                     className="bg-black/80 p-6 rounded-lg"

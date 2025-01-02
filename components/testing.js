@@ -20,5 +20,67 @@
 //     </div>
 //     </div>
 
-
 // "@rainbow-me/rainbowkit": "^2.2.1", // 2.1.5
+
+
+{ /***
+
+mutation createNFT($chainId: Int!, $name: String!, $description: String!, $collectionAddress: String!, $tokenId: Int!, $ownerAddress: String!, $metadata: String!, $mintedAt: Int!) {
+    createNFT(chainId: $chainId, name: $name, description: $description, collectionAddress: $collectionAddress, tokenId: $tokenId, ownerAddress: $ownerAddress, metadata: $metadata, mintedAt: $mintedAt) {
+      id
+      chainId
+      name
+      description
+      collectionAddress
+      tokenId
+      ownerAddress
+      metadata
+      mintedAt
+
+    }
+  }
+
+{
+    "chainId": 111111,
+    "name": "Bored Ape Yacht Club",
+    "description": "This is a bored ape",
+    "collectionAddress": "0xjd",
+    "tokenId": 199,
+    "ownerAddress": "0xgt67hgg",
+    "metadata": "https://eme.com",
+    "mintedAt": 40900899
+  }
+
+
+
+  mutation createCollection($id: ID!, $chainId: Int!, $name: String!, $description: String!, $ownerAddress: String!, $createdAt: String!, $price: Int!, $imageUrl: String!, $totalSupply: Int!, $mintedAmount: Int!) {
+    createCollection(id: $id, chainId: $chainId, name: $name, description: $description, ownerAddress: $ownerAddress, createdAt: $createdAt, price: $price, imageUrl: $imageUrl, totalSupply: $totalSupply, mintedAmount: $mintedAmount) {
+      id
+      chainId
+      name
+      description
+      ownerAddress
+      createdAt
+      price
+      imageUrl
+      totalSupply
+      mintedAmount
+
+    }
+  }
+
+{
+    "id": "0xfabc",
+    "chainId": 12111,
+    "name": "Bored Ape Yacht Club",
+    "description": "This is a bored ape",
+    "ownerAddress": "0xjd",
+    "createdAt": 11233999,
+    "price": 23,
+    "imageUrl": "https://eme.com",
+    "totalSupply": 40900,
+    "mintedAmount": 0,
+  }
+
+
+ */}

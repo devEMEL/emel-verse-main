@@ -1,20 +1,20 @@
- "use client"
+'use client';
 import { useState, useCallback } from 'react';
 
 export const usePopup = () => {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-  const openPopup = useCallback(() => {
-    setIsOpen(true);
-  }, []);
+    const openPopup = useCallback(() => {
+        setIsOpen(true);
+    }, []);
 
-  const closePopup = useCallback(() => {
-    setIsOpen(false);
-  }, []);
+    const closePopup = useCallback(() => {
+        setIsOpen(false);
+    }, []);
 
-  return {
-    isOpen,
-    openPopup,
-    closePopup,
-  };
+    return {
+        isOpen,
+        openPopup,
+        closePopup,
+    };
 };

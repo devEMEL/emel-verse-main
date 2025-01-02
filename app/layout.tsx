@@ -65,12 +65,10 @@ export function useEthersSigner({ chainId }: { chainId?: number } = {}) {
     );
 }
 
-
 const PT_Mono_ = PT_Mono({
     subsets: ['latin'],
     weight: ['400'],
 });
-
 
 const metadata: Metadata = {
     title: 'Create Next App',
@@ -82,20 +80,16 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-
-
-
     return (
         <html lang="en">
             <body
                 className={`${PT_Mono_.className} antialiased overflow-x-hidden text-sm`}
             >
                 <div className="relative bg-black">
-
                     <WagmiProvider config={wagmiConfig}>
                         <QueryClientProvider client={queryClient}>
                             <ApolloProvider client={client}>
-                                <RainbowKitProvider >
+                                <RainbowKitProvider>
                                     <Header />
                                     <div className="min-h-screen max-w-6xl mx-auto space-y-8 px-5 py-14 lg:px-10">
                                         {children}

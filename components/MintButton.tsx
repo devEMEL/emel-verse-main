@@ -7,12 +7,16 @@ interface MintButtonProps {
     openPopup: () => void;
 }
 
-export const MintButton: React.FC<MintButtonProps> = ({ price, disabled, openPopup}) => {
+export const MintButton: React.FC<MintButtonProps> = ({
+    price,
+    disabled,
+    openPopup,
+}) => {
     const handleMint = () => {
         // Mint functionality would be implemented here
         console.log('Minting NFT...');
         //after minting
-        openPopup()
+        openPopup();
     };
 
     return (

@@ -1,4 +1,4 @@
- "use client"
+'use client';
 import React from 'react';
 import { collections } from '@/data/sampleCollections';
 import { CollectionHeader } from '@/components/CollectionHeader';
@@ -21,7 +21,13 @@ const page: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-gray-900">
-            <SuccessPopup isOpen={isOpen} onClose={closePopup} nftName="" imageUrl="" title='NFT Minted Successfully!' />
+            <SuccessPopup
+                isOpen={isOpen}
+                onClose={closePopup}
+                nftName=""
+                imageUrl=""
+                title="NFT Minted Successfully!"
+            />
             <CollectionHeader
                 name={collection.name}
                 imageUrl={collection.imageUrl}
@@ -38,7 +44,9 @@ const page: React.FC = () => {
                 <CollectionDescription description={collection.description} />
                 <MintButton
                     price={collection.price}
-                    disabled={collection.mintedAmount === collection.totalSupply}
+                    disabled={
+                        collection.mintedAmount === collection.totalSupply
+                    }
                     openPopup={openPopup}
                 />
             </div>
