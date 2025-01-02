@@ -4,12 +4,12 @@ export const NFTType = gql`
     type NFT {
         id: ID!
         chainId: Int!
-        name: String!,
+        name: String!
+        symbol: String!
         description: String
         collectionAddress: String!
         tokenId: Int!
         ownerAddress: String!
-        metadata: String!
         mintedAt: Int!
     }
 
@@ -21,12 +21,12 @@ export const NFTType = gql`
     extend type Mutation {
         createNFT(
             chainId: Int!
-            name: String!,
+            name: String!
+            symbol: String!
             description: String
             collectionAddress: String!
             tokenId: Int!
             ownerAddress: String!
-            metadata: String!
             mintedAt: Int!
         ): NFT
     }

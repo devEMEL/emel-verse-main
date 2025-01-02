@@ -5,6 +5,7 @@ export const CollectionType = gql`
         id: ID!
         chainId: Int!
         name: String!
+        symbol: String!
         description: String
         ownerAddress: String!
         createdAt: Int!
@@ -24,6 +25,7 @@ export const CollectionType = gql`
             id: ID!
             chainId: Int!
             name: String!
+            symbol: String!
             description: String
             ownerAddress: String!
             createdAt: Int!

@@ -6,6 +6,7 @@ import { FormTextArea } from '@/components/forms/FormTextArea';
 import { ImagePreview } from '@/components/forms/ImagePreview';
 import { usePopup } from '@/hooks/usePopup';
 import { SuccessPopup } from '@/components/popups/SuccessPopup';
+import { etherToWei, getImageURI } from '@/utils';
 
 const page: React.FC = () => {
     const { isOpen, openPopup, closePopup } = usePopup();
@@ -18,12 +19,53 @@ const page: React.FC = () => {
     });
     const [imageFile, setImageFile] = useState<File | null>(null);
 
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
+    const handleCreateCollection = async(name: string, symbol: string, description: string, price: number, totalSupply: number, imageFile: File) => {
         // Handle form submission here
-        console.log('Form data:', formData);
-        console.log('Image file:', imageFile);
+        // console.log('Form data:', formData);
+        // console.log('Image file:', imageFile);
+        // use as BigInt(totalSupply)
+
+        // pin to ipfs and stuffs
+        const imageURI = await getImageURI(imageFile);
+        // create contract obj
+        // make txn
+        // read event log
+        // make createcollection request
+    }
+
+    const createCollection = async(e: FormEvent) => {
+        e.preventDefault();
+
+        if (
+            !(
+                formData.name &&
+                formData.symbol &&
+                formData.description &&
+                formData.price &&
+                formData.totalSupply &&
+                imageFile
+            )
+        )
+        return;
+
+        const priceInWei = etherToWei(formData.price);
+        console.log({name: formData.name, symbol: formData.symbol, description: formData.description, price: priceInWei, totalSupply: formData.totalSupply});
+
+        try {
+            await handleCreateCollection(formData.name, formData.symbol, formData.description, priceInWei, formData.totalSupply, imageFile )
+        } catch(err) {
+
+        }
+  
         // after form submission
+        setFormData({
+            name: '',
+            symbol: '',
+            description: '',
+            price: '',
+            totalSupply: '',
+        })
+        setImageFile(null)
         openPopup();
     };
 
@@ -47,7 +89,7 @@ const page: React.FC = () => {
                     title="NFT Collection Created Successfully!"
                 />
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={createCollection}
                     className="bg-black/80 p-6 rounded-lg"
                 >
                     <FormInput
@@ -129,7 +171,7 @@ const page: React.FC = () => {
 
                     <button
                         type="submit"
-                        // onClick={handleSubmit}
+                        // onClick={createCollection}
                         className="w-full bg-white text-black font-bold py-3 px-6 rounded-lg hover:bg-white/90 transition-colors mt-6"
                     >
                         Create Collection

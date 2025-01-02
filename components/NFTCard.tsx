@@ -1,6 +1,6 @@
 import React from 'react';
 import type { NFT } from '@/data/sampleCollections';
-import { formatAddress } from '@/utils';
+import { truncateAddress } from '@/utils';
 
 interface NFTProps {
     nft: NFT;
@@ -23,7 +23,7 @@ const NFTCard: React.FC<NFTProps> = ({ nft }) => {
                         {nft.symbol}
                     </h3>
                     <p className="text-sm text-white/80 mb-1">
-                        Contract: {formatAddress(nft.contractAddress)}
+                        Contract: {truncateAddress(nft.contractAddress)}
                     </p>
                 </div>
             </div>

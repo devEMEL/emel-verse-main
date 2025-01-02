@@ -38,9 +38,9 @@ export const FaucetForm = () => {
 
             {/* <div className='mt-4 text-center bg-green-700 py-2 font-bold'>
                 Sent 0.001 ETH  🎉 ✅️
-            </div> */}
+            </div>
 
-            {/* <div className='mt-4 text-center bg-red-700 py-2 font-bold'>
+            <div className='mt-4 text-center bg-red-700 py-2 font-bold'>
                Error, try again in 24 hrs
             </div> */}
         </form>

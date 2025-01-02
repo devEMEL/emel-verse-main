@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatAddress } from '../utils/index';
+import { truncateAddress } from '../utils/index';
 import type { Collection } from '../data/sampleCollections';
 import Link from 'next/link';
 
@@ -26,7 +26,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
                         {collection.name}
                     </h3>
                     <p className="text-sm text-white/80 mb-1">
-                        Contract: {formatAddress(collection.contractAddress)}
+                        Contract: {truncateAddress(collection.contractAddress)}
                     </p>
                     <p className="text-sm text-white/80 mb-1">
                         Created:{' '}

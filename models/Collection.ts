@@ -8,6 +8,7 @@ const collectionSchema = new mongoose.Schema(
         },
         chainId: { type: Number },
         name: { type: String },
+        symbol: { type: String },
         description: { type: String },
         ownerAddress: { type: String },
         createdAt: { type: Number },

@@ -24,18 +24,3 @@ export async function GET(req: NextRequest) {
     return handler(req);
 }
 
-// query GetCollections {
-//     collections {
-//       id
-//       name
-//       description
-//     }
-//   }
-
-// query GetCollections($id: ID!) {
-//     collection(id: $id) {
-//       id
-//       name
-//       description
-//     }
-//   }

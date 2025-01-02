@@ -5,51 +5,12 @@ import { collectionModel } from '@/models/Collection';
 export const collectionResolvers = {
     Query: {
         collections: async (_, __, { dataSources }) => {
-            // return "Hello collections"
-            // return dataSources.collections.getAll();
+            return collectionModel.find()
 
-            return [
-                {
-                    id: '100',
-                    name: 'Dom',
-                    description: 'DOM',
-                    contractAddress: 'DOM',
-                    ownerAddress: 'DOM',
-                    createdAt: 'DOM',
-                    price: 100,
-                    imageUrl: 'DOM',
-                    totalSupply: 45000,
-                    mintedAmount: 450,
-                },
-                {
-                    id: '1001',
-                    name: 'Dom',
-                    description: 'DOM',
-                    contractAddress: 'DOM',
-                    ownerAddress: 'DOM',
-                    createdAt: 'DOM',
-                    price: 100,
-                    imageUrl: 'DOM',
-                    totalSupply: 45000,
-                    mintedAmount: 450,
-                },
-            ];
         },
         collection: async (_, { id }, { dataSources }) => {
-            // return "Hello collection"
-            // return dataSources.collections.getById(id);
-            return {
-                id: '100',
-                name: 'Dom',
-                description: 'DOM',
-                contractAddress: 'DOM',
-                ownerAddress: 'DOM',
-                createdAt: 'DOM',
-                price: 100,
-                imageUrl: 'DOM',
-                totalSupply: 45000,
-                mintedAmount: 450,
-            };
+            return collectionModel.findById(id)
+            
         },
     },
     Mutation: {
@@ -59,6 +20,7 @@ export const collectionResolvers = {
                 _id: args.id,
                 chainId: args.chainId,
                 name: args.name,
+                symbol: args.symbol,
                 description: args.description,
                 ownerAddress: args.ownerAddress,
                 createdAt: args.createdAt,
@@ -70,8 +32,7 @@ export const collectionResolvers = {
             return collection.save();
         },
         updateCollection: async (_, args, { dataSources }) => {
-            return 'Hello update collection';
-            // return dataSources.collections.update(args);
+            return collectionModel.findByIdAndUpdate(args.id, {mintedAmount: args.mintedAmount}, {new: true})
         },
     },
 };

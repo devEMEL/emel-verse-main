@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatAddress } from '../utils/index';
+import { truncateAddress } from '../utils/index';
 
 interface CollectionStatsProps {
     contractAddress: string;
@@ -25,7 +25,7 @@ export const CollectionStats: React.FC<CollectionStatsProps> = ({
                     Contract Address
                 </h3>
                 <p className="text-white font-mono">
-                    {formatAddress(contractAddress)}
+                    {truncateAddress(contractAddress)}
                 </p>
             </div>
             <div className="bg-black/80 p-4 rounded-lg">
@@ -33,7 +33,7 @@ export const CollectionStats: React.FC<CollectionStatsProps> = ({
                     Owner Address
                 </h3>
                 <p className="text-white font-mono">
-                    {formatAddress(ownerAddress)}
+                    {truncateAddress(ownerAddress)}
                 </p>
             </div>
             <div className="bg-black/80 p-4 rounded-lg">

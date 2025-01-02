@@ -4,6 +4,7 @@ const nftSchema = new mongoose.Schema(
     {
         chainId: { type: Number },
         name: { type: String },
+        symbol: { type: String },
         description: { type: String },
         collectionAddress: {
             type: String,
@@ -12,7 +13,6 @@ const nftSchema = new mongoose.Schema(
         },
         tokenId: { type: Number },
         ownerAddress: { type: String },
-        metadata: { type: String },
         mintedAt: { type: Number}
     },
     {
