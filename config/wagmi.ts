@@ -1,6 +1,6 @@
 import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { http } from 'wagmi';
-import { sepolia } from 'viem/chains';
+import { baseSepolia, sepolia } from 'viem/chains';
 import type { Chain } from 'viem';
 
 const emel_Tanssi = {
@@ -35,9 +35,11 @@ export const wagmiConfig = getDefaultConfig({
     chains: [
         // emel_Tanssi
         sepolia,
+        baseSepolia
     ],
     transports: {
         // [emel_Tanssi.id]: http(),
         [sepolia.id]: http(),
+        [baseSepolia.id]: http(),
     },
 });

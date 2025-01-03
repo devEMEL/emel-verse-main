@@ -2,9 +2,6 @@ import { ethers} from 'ethers';
 
 import { FileObject, PinataSDK } from 'pinata';
 
-export const SCROLL_SEPOLIA_CA = '0x68df4D3380823335e69909Bd4E2a17E93093Ee77';
-export const EMEL_TANSSI = '0x9536D5AABc59F130147c56576A2a88b01e8fc710';
-
 const IMAGE_SAMPLE =
     'https://maroon-major-crawdad-175.mypinata.cloud/ipfs/bafkreiaiqqqnwyvi5gksqfwsqihdt7izf5fklnbehal7elyusducquwq6i';
 
@@ -46,12 +43,10 @@ export const weiToEther = (amountInWei: string) => {
 
 export const getImageURI = async (imageFile: FileObject) => {
     const upload = await pinata.upload.file(imageFile);
-    console.log(`ipfs://${upload.IpfsHash}`);
-    return `ipfs://${upload.IpfsHash}`;
+    return `ipfs://${upload.cid}`;
 };
 
 export const getTokenURI = async (metadata: object) => {
     const upload = await pinata.upload.json(metadata);
-    console.log(`ipfs://${upload.IpfsHash}`);
-    return `ipfs://${upload.IpfsHash}`;
+    return `ipfs://${upload.cid}`;
 };

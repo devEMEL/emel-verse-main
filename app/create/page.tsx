@@ -9,10 +9,18 @@ import { SuccessPopup } from '@/components/popups/SuccessPopup';
 import { etherToWei, getImageURI } from '@/utils';
 import { useErrorPopup } from '@/hooks/useErrorPopup';
 import { ErrorPopup } from '@/components/popups/ErrorPopup';
+import { useToastify } from '@/hooks/useToastify';
+import { ToastPopup } from '@/components/popups/ToastPopup';
+import { ethers } from 'ethers';
+import { useEthersProvider, useEthersSigner } from '../layout';
+import NFTCollectionFactory from '@/abi/NFTCollectionFactory.json';
+import { getAndParseEventLogs } from '@/utils/eventLogs';
 
 const page: React.FC = () => {
     const { isOpen, openPopup, closePopup } = usePopup();
     const { isOpen: isErrorOpen, openPopup: openErrorPopup, closePopup: closeErrorPopup } = useErrorPopup();
+    const { isOpen: isToastOpen, openPopup: openToastPopup, closePopup: closeToastPopup } = useToastify();
+
     const [formData, setFormData] = useState({
         name: '',
         symbol: '',
@@ -22,21 +30,57 @@ const page: React.FC = () => {
     });
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>("Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit libero optio adipisci eos atque culpa corporis error eum maxime suscipit quibusdam, veritatis et laborum pariatur quod, alias in nobis magnam.");
+    const [loadingMessage, setLoadingMessage] = useState<string>("Loading...");
+
+    const provider = useEthersProvider();
+    const signer = useEthersSigner();
 
     const handleCreateCollection = async(name: string, symbol: string, description: string, price: bigint, totalSupply: string, imageFile: File) => {
+        console.log("HandleCreateCollection...")
         // Handle form submission here
-        // console.log('Form data:', formData);
-        // console.log('Image file:', imageFile);
 
         // use as BigInt(totalSupply)
 
         // pin to ipfs and stuffs
+        setLoadingMessage("Pinning Image to IPFS")
+        openToastPopup()
         const imageURI = await getImageURI(imageFile);
+        console.log(imageURI);
+        // closeToastPopup()
+        setLoadingMessage("Deploying Collection...")
         // create contract obj
-        
+        const contract = new ethers.Contract(
+            NFTCollectionFactory.network[0].address,
+            NFTCollectionFactory.abi,
+            signer
+        );
+        console.log(NFTCollectionFactory.network[0].address)
         // make txn
+        const tx = await contract.createCollection(
+            name,
+            symbol,
+            description,
+            price,
+            BigInt(totalSupply),
+            imageURI
+        );
+        const response = await tx.wait();
+        console.log(response);
+        
         // read event log
-        // make createcollection request
+        const filter = contract.filters.CollectionCreated();
+        const events = await contract.queryFilter(filter, response.blockNumber);
+        console.log(events);
+
+        // make createcollection request (push to db)
+
+        closeToastPopup();
+
+        // display success popup (define the image url and name)
+        openPopup();
+
+        
+
     }
 
     const createCollection = async(e: FormEvent) => {
@@ -58,21 +102,30 @@ const page: React.FC = () => {
         console.log({name: formData.name, symbol: formData.symbol, description: formData.description, price: priceInWei, totalSupply: formData.totalSupply});
 
         try {
-            await handleCreateCollection(formData.name, formData.symbol, formData.description, priceInWei, formData.totalSupply, imageFile )
-        } catch(err) {
 
+            await handleCreateCollection(formData.name, formData.symbol, formData.description, priceInWei, formData.totalSupply, imageFile );
+        } catch(err: any) {
+            // close toast
+            closeToastPopup();
+            console.log({errorMessage: err})
+            setErrorMessage(String(err));
+            openErrorPopup();
+            console.log(err);
+        } finally {
+            // after form submission
+            setFormData({
+                name: '',
+                symbol: '',
+                description: '',
+                price: '',
+                totalSupply: '',
+            })
+            setImageFile(null)
+            
         }
   
-        // after form submission
-        setFormData({
-            name: '',
-            symbol: '',
-            description: '',
-            price: '',
-            totalSupply: '',
-        })
-        setImageFile(null)
-        openPopup();
+
+        
     };
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +152,11 @@ const page: React.FC = () => {
                     isOpen={isErrorOpen}
                     onClose={closeErrorPopup}
                     message={errorMessage}
+                 />
+                 <ToastPopup 
+                      isVisible={isToastOpen}
+                      message={loadingMessage}
+                     
                  />
                 <form
                     onSubmit={createCollection}
