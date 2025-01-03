@@ -3,7 +3,7 @@ import { PT_Mono } from 'next/font/google';
 
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_CLIENTS } from '@/queries/clientQueries';
-import { Add_CLIENT, DELETE_CLIENT } from '@/mutations/clientMutations';
+import { Add_CLIENT, DELETE_CLIENT } from '@/mutations/collectionMutations';
 
 const PT_Mono_ = PT_Mono({
     subsets: ['latin'],

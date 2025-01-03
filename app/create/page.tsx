@@ -6,7 +6,7 @@ import { FormTextArea } from '@/components/forms/FormTextArea';
 import { ImagePreview } from '@/components/forms/ImagePreview';
 import { usePopup } from '@/hooks/usePopup';
 import { SuccessPopup } from '@/components/popups/SuccessPopup';
-import { etherToWei, getImageURI } from '@/utils';
+import { etherToWei, getImageURI, imageURIToSrc } from '@/utils';
 import { useErrorPopup } from '@/hooks/useErrorPopup';
 import { ErrorPopup } from '@/components/popups/ErrorPopup';
 import { useToastify } from '@/hooks/useToastify';
@@ -15,6 +15,11 @@ import { ethers } from 'ethers';
 import { useEthersProvider, useEthersSigner } from '../layout';
 import NFTCollectionFactory from '@/abi/NFTCollectionFactory.json';
 import { getAndParseEventLogs } from '@/utils/eventLogs';
+import { useChainId } from 'wagmi';
+import { CREATE_COLLECTION } from '@/mutations/collectionMutations';
+import { GET_COLLECTIONS } from '@/queries/collectionQueries';
+import { useMutation } from '@apollo/client';
+
 
 const page: React.FC = () => {
     const { isOpen, openPopup, closePopup } = usePopup();
@@ -31,9 +36,34 @@ const page: React.FC = () => {
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>("Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit libero optio adipisci eos atque culpa corporis error eum maxime suscipit quibusdam, veritatis et laborum pariatur quod, alias in nobis magnam.");
     const [loadingMessage, setLoadingMessage] = useState<string>("Loading...");
+    const [eventName, setEventName] = useState<string>("");
+    const [eventImageUrl, setEventImageUrl] = useState<string>("");
 
     const provider = useEthersProvider();
     const signer = useEthersSigner();
+
+    const chainId = useChainId();
+
+    const [createCollection, { loading, error }] = useMutation(CREATE_COLLECTION, {
+        update(cache, { data: { createCollection } }) {
+          const existingData = cache.readQuery({ 
+            query: GET_COLLECTIONS 
+          });
+          
+          if (existingData) {
+            const { collections } = existingData;
+            cache.writeQuery({
+              query: GET_COLLECTIONS,
+              data: { 
+                collections: [...collections, createCollection]
+              },
+            });
+          }
+        },
+        onError: (error) => {
+          console.error('Create collection error:', error);
+        }
+      });
 
     const handleCreateCollection = async(name: string, symbol: string, description: string, price: bigint, totalSupply: string, imageFile: File) => {
         console.log("HandleCreateCollection...")
@@ -72,18 +102,37 @@ const page: React.FC = () => {
         const events = await contract.queryFilter(filter, response.blockNumber);
         console.log(events);
 
+        const eventObj = {
+            chainId,
+            contractAddress: events[0].args[0],
+            name: events[0].args[1],
+            symbol: events[0].args[2],
+            description: events[0].args[3],
+            creator: events[0].args[4],
+            createdAt: Number(String(events[0].args[5])),
+            price: Number(String(events[0].args[6])),
+            maxSupply: Number(String(events[0].args[7])),
+            imageURI: events[0].args[8],
+            mintedAmount: 0,
+        };
+        console.log({eventObj});
         // make createcollection request (push to db)
+        await createCollection({variables: {id: eventObj.contractAddress, chainId: String(chainId), name: String(eventObj.name), symbol: String(eventObj.symbol), description: String(eventObj.description), ownerAddress: String(eventObj.creator), createdAt: String(eventObj.createdAt), price: String(eventObj.price), imageUrl: String(eventObj.imageURI), totalSupply: String(eventObj.maxSupply), mintedAmount: String(eventObj.mintedAmount)}})
 
-        closeToastPopup();
+        // mutation createCollection($id: ID!, $chainId: Int!, $name: String!, $symbol: String!, $description: String!, $ownerAddress: String!, $createdAt: String!, $price: Int!, $imageUrl: String!, $totalSupply: Int!, $mintedAmount: Int!) {
+        // createCollection(id: $id, chainId: $chainId, name: $name, symbol: $symbol, description: $description, ownerAddress: $ownerAddress, createdAt: $createdAt, price: $price, imageUrl: $imageUrl, totalSupply: $totalSupply, mintedAmount: $mintedAmount)
 
-        // display success popup (define the image url and name)
-        openPopup();
+        return {
+            name: eventObj.name,
+            imageURI: eventObj.imageURI
+        }
+
 
         
 
     }
 
-    const createCollection = async(e: FormEvent) => {
+    const createCollectionFunc = async(e: FormEvent) => {
         e.preventDefault();
 
         if (
@@ -103,7 +152,15 @@ const page: React.FC = () => {
 
         try {
 
-            await handleCreateCollection(formData.name, formData.symbol, formData.description, priceInWei, formData.totalSupply, imageFile );
+            const { name, imageURI } = await handleCreateCollection(formData.name, formData.symbol, formData.description, priceInWei, formData.totalSupply, imageFile );
+            setEventName(name);
+            // imageURIToSrc
+            setEventImageUrl(imageURI);
+
+            closeToastPopup();
+
+            // display success popup (define the image url and name)
+            openPopup();
         } catch(err: any) {
             // close toast
             closeToastPopup();
@@ -144,8 +201,8 @@ const page: React.FC = () => {
                 <SuccessPopup
                     isOpen={isOpen}
                     onClose={closePopup}
-                    nftName=""
-                    imageUrl=""
+                    nftName={eventName}
+                    imageUrl={eventImageUrl}
                     title="NFT Collection Created Successfully!"
                 />
                 <ErrorPopup
@@ -159,7 +216,7 @@ const page: React.FC = () => {
                      
                  />
                 <form
-                    onSubmit={createCollection}
+                    onSubmit={createCollectionFunc}
                     className="bg-black/80 p-6 rounded-lg"
                 >
                     <FormInput
@@ -241,7 +298,7 @@ const page: React.FC = () => {
 
                     <button
                         type="submit"
-                        // onClick={createCollection}
+                        // onClick={createCollectionFunc}
                         className="w-full bg-white text-black font-bold py-3 px-6 rounded-lg hover:bg-white/90 transition-colors mt-6"
                     >
                         Create Collection

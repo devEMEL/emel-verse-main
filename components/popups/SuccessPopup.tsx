@@ -1,5 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
+import { useImageLoader } from '@/hooks/useImageLoader';
 
 interface SuccessPopupProps {
     isOpen: boolean;
@@ -18,6 +19,8 @@ export const SuccessPopup: React.FC<SuccessPopupProps> = ({
 }) => {
     if (!isOpen) return null;
 
+    const { imageSrc, isLoading } = useImageLoader(imageUrl);
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
             <div className="relative bg-black text-white rounded-lg max-w-md w-full p-6">
@@ -34,11 +37,12 @@ export const SuccessPopup: React.FC<SuccessPopupProps> = ({
                     <div className="mb-8">
                         <img
                             src={
-                                imageUrl ||
+                                imageSrc ||
                                 'https://i.seadn.io/gae/Ju9CkWtV-1Okvf45wo8UctR-M9He2PjILP0oOvxE89AyiPPGtrR3gysu1Zgy0hjd2xKIgjJJtWIc0ybj4Vd7wv8t3pxDGHoJBzDB?auto=format&w=1000'
                             }
                             alt={nftName}
-                            className="w-full h-80 object-cover rounded-lg"
+                            className={`${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300 w-full h-80 object-cover rounded-lg`}
+                            // className="w-full h-80 object-cover rounded-lg"
                         />
                     </div>
 

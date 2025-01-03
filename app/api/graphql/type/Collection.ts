@@ -3,16 +3,16 @@ import { gql } from '@apollo/client';
 export const CollectionType = gql`
     type Collection {
         id: ID!
-        chainId: Int!
+        chainId: String!
         name: String!
         symbol: String!
         description: String
         ownerAddress: String!
-        createdAt: Int!
-        price: Int!
+        createdAt: String!
+        price: String!
         imageUrl: String!
-        totalSupply: Int!
-        mintedAmount: Int!
+        totalSupply: String!
+        mintedAmount: String!
     }
 
     extend type Query {
@@ -23,19 +23,19 @@ export const CollectionType = gql`
     extend type Mutation {
         createCollection(
             id: ID!
-            chainId: Int!
+            chainId: String!
             name: String!
             symbol: String!
             description: String
             ownerAddress: String!
-            createdAt: Int!
-            price: Int!
-            totalSupply: Int!
+            createdAt: String!
+            price: String!
+            totalSupply: String!
             imageUrl: String!
-            mintedAmount: Int!
+            mintedAmount: String!
         ): Collection
 
-        updateCollection(id: ID!, mintedAmount: Int!): Collection
+        updateCollection(id: ID!, mintedAmount: String!): Collection
     }
 `;
 
