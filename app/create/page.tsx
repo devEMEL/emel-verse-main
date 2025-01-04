@@ -6,7 +6,7 @@ import { FormTextArea } from '@/components/forms/FormTextArea';
 import { ImagePreview } from '@/components/forms/ImagePreview';
 import { usePopup } from '@/hooks/usePopup';
 import { SuccessPopup } from '@/components/popups/SuccessPopup';
-import { etherToWei, getImageURI, imageURIToSrc } from '@/utils';
+import { etherToWei, getImageURI } from '@/utils';
 import { useErrorPopup } from '@/hooks/useErrorPopup';
 import { ErrorPopup } from '@/components/popups/ErrorPopup';
 import { useToastify } from '@/hooks/useToastify';
@@ -14,7 +14,6 @@ import { ToastPopup } from '@/components/popups/ToastPopup';
 import { ethers } from 'ethers';
 import { useEthersProvider, useEthersSigner } from '../layout';
 import NFTCollectionFactory from '@/abi/NFTCollectionFactory.json';
-import { getAndParseEventLogs } from '@/utils/eventLogs';
 import { useChainId } from 'wagmi';
 import { CREATE_COLLECTION } from '@/mutations/collectionMutations';
 import { GET_COLLECTIONS } from '@/queries/collectionQueries';
@@ -119,17 +118,11 @@ const page: React.FC = () => {
         // make createcollection request (push to db)
         await createCollection({variables: {id: eventObj.contractAddress, chainId: String(chainId), name: String(eventObj.name), symbol: String(eventObj.symbol), description: String(eventObj.description), ownerAddress: String(eventObj.creator), createdAt: String(eventObj.createdAt), price: String(eventObj.price), imageUrl: String(eventObj.imageURI), totalSupply: String(eventObj.maxSupply), mintedAmount: String(eventObj.mintedAmount)}})
 
-        // mutation createCollection($id: ID!, $chainId: Int!, $name: String!, $symbol: String!, $description: String!, $ownerAddress: String!, $createdAt: String!, $price: Int!, $imageUrl: String!, $totalSupply: Int!, $mintedAmount: Int!) {
-        // createCollection(id: $id, chainId: $chainId, name: $name, symbol: $symbol, description: $description, ownerAddress: $ownerAddress, createdAt: $createdAt, price: $price, imageUrl: $imageUrl, totalSupply: $totalSupply, mintedAmount: $mintedAmount)
-
         return {
             name: eventObj.name,
             imageURI: eventObj.imageURI
         }
-
-
         
-
     }
 
     const createCollectionFunc = async(e: FormEvent) => {

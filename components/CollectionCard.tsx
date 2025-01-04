@@ -1,8 +1,21 @@
 import React from 'react';
-import { truncateAddress, weiToEther } from '../utils/index';
-import type { Collection } from '../data/sampleCollections';
+import { formatRelativeTime, truncateAddress, weiToEther } from '../utils/index';
 import Link from 'next/link';
 import { useImageLoader } from '@/hooks/useImageLoader';
+
+interface Collection {
+    id: string;
+    chainId: string;
+    name: string;
+    symbol: string;
+    description: string;
+    ownerAddress: string;
+    createdAt: string;
+    price: string;
+    imageUrl: string;
+    totalSupply: string;
+    mintedAmount: string;
+}
 
 interface CollectionCardProps {
     collection: Collection;
@@ -15,31 +28,11 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
     
     const { imageSrc, isLoading, error } = useImageLoader(collection.imageUrl);
 
-    const formatRelativeTime = (timestamp: any): any => {
-        const now = Date.now();
-        const diffInSeconds = Math.floor((now - timestamp * 1000) / 1000);
-      
-        if (diffInSeconds < 60) {
-          return `${diffInSeconds} seconds ago`;
-        }
-      
-        const diffInMinutes = Math.floor(diffInSeconds / 60);
-        if (diffInMinutes < 60) {
-          return `${diffInMinutes} minutes ago`;
-        }
-      
-        const diffInHours = Math.floor(diffInMinutes / 60);
-        if (diffInHours < 24) {
-          return `${diffInHours} ${diffInHours === 1 ? 'hr' : 'hrs'} ago`;
-        }
-      
-        const diffInDays = Math.floor(diffInHours / 24);
-        return `${diffInDays} ${diffInDays === 1 ? 'day' : 'days'} ago`;
-      };
+
     return (
         <div className="bg-black rounded-lg shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-1">
             <Link
-                href={`/id/${collection.id}`}
+                href={`/collection/${collection.id}`}
                 className="block bg-black rounded-lg shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-1"
             >
                 <img

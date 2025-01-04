@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const nftSchema = new mongoose.Schema(
     {
-        chainId: { type: Number },
+        chainId: { type: String },
         name: { type: String },
         symbol: { type: String },
         description: { type: String },
@@ -11,9 +11,10 @@ const nftSchema = new mongoose.Schema(
             required: true,
             ref: 'Collection',
         },
-        tokenId: { type: Number },
+        tokenId: { type: String },
         ownerAddress: { type: String },
-        mintedAt: { type: Number}
+        mintedAt: { type: String},
+        imageUrl: { type: String},
     },
     {
         timestamps: true,

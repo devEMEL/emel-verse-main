@@ -1,6 +1,20 @@
 import React from 'react';
 import { CollectionCard } from './CollectionCard';
-import type { Collection } from '../data/sampleCollections';
+
+
+interface Collection {
+    id: string;
+    chainId: string;
+    name: string;
+    symbol: string;
+    description: string;
+    ownerAddress: string;
+    createdAt: string;
+    price: string;
+    imageUrl: string;
+    totalSupply: string;
+    mintedAmount: string;
+}
 
 interface CollectionsProps {
     title: String;

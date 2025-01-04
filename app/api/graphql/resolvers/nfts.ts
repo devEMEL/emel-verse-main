@@ -22,6 +22,7 @@ export const nftResolvers = {
                 tokenId: args.tokenId,
                 ownerAddress: args.ownerAddress,
                 mintedAt: args.mintedAt,
+                imageUrl: args.imageUrl,
             });
             return nft.save();
 

@@ -43,7 +43,7 @@ const page: React.FC = () => {
             <div className="container mx-auto px-4 py-8 space-y-8">
                 <CollectionStats
                     contractAddress={collection?.collection?.id}
-                    ownerAddress={collection?.collection?.ownerAddress || '0xhjhuub1'}
+                    ownerAddress={collection?.collection?.ownerAddress}
                     createdAt={collection?.collection?.createdAt}
                     price={collection?.collection?.price}
                     mintedAmount={collection?.collection?.mintedAmount}
@@ -51,7 +51,9 @@ const page: React.FC = () => {
                 />
                 <CollectionDescription description={collection?.collection?.description} />
                 <MintButton
-                    price={collection?.collection?.price}
+                    collection={collection?.collection}
+                    isOpen={isOpen}
+                    onClose={closePopup}
                     disabled={
                         collection?.collection?.mintedAmount === collection?.collection?.totalSupply
                     }

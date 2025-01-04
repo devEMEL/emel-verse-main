@@ -1,5 +1,5 @@
 import React from 'react';
-import { truncateAddress } from '../utils/index';
+import { formatRelativeTime, truncateAddress, weiToEther } from '../utils/index';
 
 interface CollectionStatsProps {
     contractAddress: string;
@@ -38,17 +38,17 @@ export const CollectionStats: React.FC<CollectionStatsProps> = ({
             </div>
             <div className="bg-black/80 p-4 rounded-lg">
                 <h3 className="text-sm font-medium text-white/60 mb-1">
-                    Created At
+                    Created
                 </h3>
                 <p className="text-white">
-                    {new Date(createdAt).toLocaleDateString()}
+                    {formatRelativeTime(createdAt)}
                 </p>
             </div>
             <div className="bg-black/80 p-4 rounded-lg">
                 <h3 className="text-sm font-medium text-white/60 mb-1">
                     Price
                 </h3>
-                <p className="text-white">{price} ETH</p>
+                <p className="text-white">{weiToEther(String(price))} ETH</p>
             </div>
             <div className="bg-black/80 p-4 rounded-lg">
                 <h3 className="text-sm font-medium text-white/60 mb-1">

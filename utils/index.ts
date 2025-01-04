@@ -20,18 +20,27 @@ export const truncateAddress = (
     return `${address.slice(0, startLength)}...${address.slice(-endLength)}`;
 };
 
-export const imageURIToSrc = (imageURI: string) => {
-    let imageSrc;
-    if (imageURI.includes('//')) {
-        imageSrc = `https://maroon-major-crawdad-175.mypinata.cloud/ipfs/${
-            imageURI.split('//')[1]
-        }`;
-    } else {
-        imageSrc = IMAGE_SAMPLE;
+export const formatRelativeTime = (timestamp: any): any => {
+    const now = Date.now();
+    const diffInSeconds = Math.floor((now - timestamp * 1000) / 1000);
+  
+    if (diffInSeconds < 60) {
+      return `${diffInSeconds} seconds ago`;
     }
-
-    return imageSrc;
-};
+  
+    const diffInMinutes = Math.floor(diffInSeconds / 60);
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes} minutes ago`;
+    }
+  
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    if (diffInHours < 24) {
+      return `${diffInHours} ${diffInHours === 1 ? 'hr' : 'hrs'} ago`;
+    }
+  
+    const diffInDays = Math.floor(diffInHours / 24);
+    return `${diffInDays} ${diffInDays === 1 ? 'day' : 'days'} ago`;
+  };
 
 export const etherToWei = (amountInEther: string) => {
     return ethers.parseEther(amountInEther);
