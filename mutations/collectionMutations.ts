@@ -19,3 +19,21 @@ export const CREATE_COLLECTION = gql`
     }
 `;
 
+export const UPDATE_COLLECTION = gql`
+    mutation updateCollection($id: ID!) {
+        updateCollection(id: $id) {
+            id
+            chainId
+            name
+            symbol
+            description
+            ownerAddress
+            createdAt
+            price
+            imageUrl
+            totalSupply
+            mintedAmount
+
+        }
+    }
+`;

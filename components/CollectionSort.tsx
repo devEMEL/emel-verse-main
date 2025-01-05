@@ -3,10 +3,10 @@ import { ArrowUpDown, Clock, DollarSign, SortAsc } from 'lucide-react';
 
 const CollectionSort = ({ onSort, activeSort }) => {
     const sortOptions = [
-        { id: 'all', label: 'All', icon: <ArrowUpDown className="w-4 h-4" /> },
+        // { id: 'all', label: 'All', icon: <ArrowUpDown className="w-4 h-4" /> },
         { id: 'name', label: 'Name', icon: <SortAsc className="w-4 h-4" /> },
         {
-            id: 'created',
+            id: 'createdAt',
             label: 'Time Created',
             icon: <Clock className="w-4 h-4" />,
         },

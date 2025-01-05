@@ -3,32 +3,33 @@ import { gql } from '@apollo/client';
 export const NFTType = gql`
     type NFT {
         id: ID!
-        chainId: Int!
+        chainId: String!
         name: String!
         symbol: String!
         description: String
         collectionAddress: String!
-        tokenId: Int!
+        tokenId: String!
         ownerAddress: String!
-        mintedAt: Int!
+        mintedAt: String!
         imageUrl: String!
     }
 
     extend type Query {
         nfts: [NFT!]!
         nft(id: ID!): NFT
+        getNftsByOwner(ownerAddress: String!): [NFT]
     }
 
     extend type Mutation {
         createNFT(
-            chainId: Int!
+            chainId: String!
             name: String!
             symbol: String!
             description: String
             collectionAddress: String!
-            tokenId: Int!
+            tokenId: String!
             ownerAddress: String!
-            mintedAt: Int!
+            mintedAt: String!
             imageUrl: String!
         ): NFT
     }

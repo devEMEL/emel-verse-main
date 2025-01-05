@@ -16,8 +16,10 @@ export const CollectionType = gql`
     }
 
     extend type Query {
-        collections: [Collection!]!
+        collections(orderBy: String!, orderDirection: String!): [Collection!]!
         collection(id: ID!): Collection
+        getCollectionsByOwner(ownerAddress: String!): [Collection]
+
     }
 
     extend type Mutation {
@@ -35,7 +37,7 @@ export const CollectionType = gql`
             mintedAmount: String!
         ): Collection
 
-        updateCollection(id: ID!, mintedAmount: String!): Collection
+        updateCollection(id: ID!): Collection
     }
 `;
 

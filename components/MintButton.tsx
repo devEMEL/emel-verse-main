@@ -14,6 +14,8 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { SuccessPopup } from './popups/SuccessPopup';
 import { ErrorPopup } from './popups/ErrorPopup';
 import { ToastPopup } from './popups/ToastPopup';
+import { UPDATE_COLLECTION } from '@/mutations/collectionMutations';
+import { GET_COLLECTIONS } from '@/queries/collectionQueries';
 
 interface Collection {
     id: string;
@@ -82,6 +84,33 @@ export const MintButton: React.FC<MintButtonProps> = ({
         }
       });
 
+      const [updateCollection, { loading: upl, error: upe }] = useMutation(UPDATE_COLLECTION, {
+        update(cache, { data: { updateCollection } }) {
+          const existingData = cache.readQuery({
+            query: GET_COLLECTIONS,
+          });
+      
+          if (existingData) {
+            const { collections } = existingData;
+      
+            // Replace the updated collection in the array
+            const updatedCollections = collections.map((collection) =>
+              collection.id === updateCollection.id ? updateCollection : collection
+            );
+      
+            cache.writeQuery({
+              query: GET_COLLECTIONS,
+              data: {
+                collections: updatedCollections,
+              },
+            });
+          }
+        },
+        onError: (error) => {
+          console.error('Update Collection error:', error);
+        },
+      });
+
     const handleMintCollection = async () => {
         console.log('Minting NFT...');
 
@@ -127,7 +156,10 @@ export const MintButton: React.FC<MintButtonProps> = ({
         };
         console.log(eventObj);
 
-        await createNFT({variables: {chainId: String(chainId), name: String(eventObj.name), symbol: String(eventObj.symbol), description: String(eventObj.description), collectionAddress: String(eventObj.collectionAddress), tokenId: String(eventObj.tokenId), ownerAddress: String(eventObj.owner), mintedAt: String(eventObj.createdAt)}})
+        await createNFT({variables: {chainId: String(chainId), name: String(eventObj.name), symbol: String(eventObj.symbol), description: String(eventObj.description), collectionAddress: String(eventObj.collectionAddress), tokenId: String(eventObj.tokenId), ownerAddress: String(eventObj.owner), mintedAt: String(eventObj.createdAt), imageUrl: String(eventObj.imageUrl)}});
+        //increment collection's mintedAmount
+        console.log({id: String(eventObj.collectionAddress)})
+        await updateCollection({ variables: { id: String(eventObj.collectionAddress) }});
 
 
         return {

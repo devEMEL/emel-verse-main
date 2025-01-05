@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-// import { collections } from '@/data/sampleCollections';
 import { CollectionHeader } from '@/components/CollectionHeader';
 import { CollectionStats } from '@/components/CollectionStats';
 import { CollectionDescription } from '@/components/CollectionDescription';
@@ -11,14 +10,14 @@ import { useQuery } from '@apollo/client';
 import { GET_COLLECTION } from '@/queries/collectionQueries';
 import { useImageLoader } from '@/hooks/useImageLoader';
 
-const page: React.FC = () => {
+
+
+
+const page: React.FC = ({ params }) => {
+    const { id } = params;
     const { isOpen, openPopup, closePopup } = usePopup();
-    // const contractAddress = '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D';
-    // const collection = collections.find(
-    //     (c) => c.contractAddress === contractAddress
-    // );
     const { loading, data: collection, error } = useQuery(GET_COLLECTION, {
-        variables: { id: "0x05528d7cEf63327Ba6204F5501F5b98692C7548E"}
+        variables: { id }
     });
 
     const { imageSrc, isLoading, } = useImageLoader(collection?.collection?.imageUrl);

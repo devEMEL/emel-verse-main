@@ -10,6 +10,14 @@ export const nftResolvers = {
         nft: async (_, { id }, { dataSources }) => {
             return nftModel.findById(id)
         },
+        getNftsByOwner: async (_, { ownerAddress }, { dataSources }) => {
+            try {
+              return await nftModel.find({ ownerAddress });
+            } catch (error) {
+              console.error("Error fetching nfts by owner:", error);
+              throw new Error("Unable to fetch nfts for the specified owner");
+            }
+          },
     },
     Mutation: {
         createNFT: async (_, args, { dataSources }) => {

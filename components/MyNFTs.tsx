@@ -1,6 +1,18 @@
 import React from 'react';
-import type { NFT } from '../data/sampleCollections';
 import NFTCard from './NFTCard';
+
+interface NFT {
+    id: string;
+    chainId: string;
+    name: string;
+    symbol: string;
+    description: string;
+    collectionAddress: string;
+    tokenId: string;
+    ownerAddress: string;
+    mintedAt: string;
+    imageUrl: string;
+}
 
 interface MyNFTsProps {
     title: String;

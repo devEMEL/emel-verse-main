@@ -12,13 +12,14 @@ export const GET_NFTS = gql`
             tokenId
             ownerAddress
             mintedAt
+            imageUrl
         }
     }
 `;
 
 export const GET_NFT = gql`
-    query getNFT($collectionAddress: String!) {
-        nft(collectionAddress: $collectionAddress) {
+    query getNFT($id: String!) {
+        nft(id: $id) {
             id
             chainId
             name
@@ -28,6 +29,26 @@ export const GET_NFT = gql`
             tokenId
             ownerAddress
             mintedAt
+            imageUrl
         }
     }
+`;
+
+export const GET_NFTS_BY_OWNER = gql`
+
+    query GetNftsByOwner($ownerAddress: String!) {
+        getNftsByOwner(ownerAddress: $ownerAddress) {
+            id
+            chainId
+            name
+            symbol
+            description
+            collectionAddress
+            tokenId
+            ownerAddress
+            mintedAt
+            imageUrl
+        }
+    }
+
 `;
