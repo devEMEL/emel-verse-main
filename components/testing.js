@@ -59,3 +59,22 @@
 
 
  */}
+
+
+         // if(sortType === "cheapest") {
+        //     setActiveSort('price');
+        //     setOrderDirection('desc')
+        // }
+        // if(sortType === "expensive") {
+        //     setActiveSort('price');
+        //     setOrderDirection('asc')  
+        // }
+
+
+                // {
+        //     id: 'expensive',
+        //     label: 'Most Expensive',
+        //     icon: <DollarSign className="w-4 h-4" />,
+        // },
+
+                // { id: 'all', label: 'All', icon: <ArrowUpDown className="w-4 h-4" /> },

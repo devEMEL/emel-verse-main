@@ -23,14 +23,6 @@ const CollectionsPage = () => {
             setOrderDirection('asc'); // Reset to ascending order if sortType changes
         }
 
-        if(sortType === "cheapest") {
-            setActiveSort('price');
-            setOrderDirection('desc')
-        }
-        if(sortType === "expensive") {
-            setActiveSort('price');
-            setOrderDirection('asc')  
-        }
     };
 
     useEffect(() => {

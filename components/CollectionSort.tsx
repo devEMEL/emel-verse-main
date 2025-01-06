@@ -1,9 +1,13 @@
 'use client';
 import { ArrowUpDown, Clock, DollarSign, SortAsc } from 'lucide-react';
 
-const CollectionSort = ({ onSort, activeSort }) => {
+interface CollectionSortProps {
+    onSort: (id: string) => void;
+    activeSort: string;
+}
+
+const CollectionSort: React.FC<CollectionSortProps> = ({ onSort, activeSort }) => {
     const sortOptions = [
-        // { id: 'all', label: 'All', icon: <ArrowUpDown className="w-4 h-4" /> },
         { id: 'name', label: 'Name', icon: <SortAsc className="w-4 h-4" /> },
         {
             id: 'createdAt',
@@ -11,13 +15,8 @@ const CollectionSort = ({ onSort, activeSort }) => {
             icon: <Clock className="w-4 h-4" />,
         },
         {
-            id: 'cheapest',
-            label: 'Cheapest',
-            icon: <DollarSign className="w-4 h-4" />,
-        },
-        {
-            id: 'expensive',
-            label: 'Most Expensive',
+            id: 'price',
+            label: 'price',
             icon: <DollarSign className="w-4 h-4" />,
         },
     ];
