@@ -52,10 +52,10 @@ export const weiToEther = (amountInWei: string) => {
 
 export const getImageURI = async (imageFile: FileObject) => {
     const upload = await pinata.upload.file(imageFile);
-    return `ipfs://${upload.cid}`;
+    return `ipfs://${upload.IpfsHash}`;
 };
 
 export const getTokenURI = async (metadata: object) => {
     const upload = await pinata.upload.json(metadata);
-    return `ipfs://${upload.cid}`;
+    return `ipfs://${upload.IpfsHash}`;
 };
