@@ -1,15 +1,12 @@
 'use client';
 import { CollectionsGrid } from '@/components/CollectionsGrid';
 import MyNFTs from '@/components/MyNFTs';
-import { collections } from '@/data/sampleCollections';
-import { NFTs } from '../../data/sampleCollections';
-import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_COLLECTIONS_BY_OWNER } from '@/queries/collectionQueries';
 import { useAccount, useChainId } from 'wagmi';
 import { GET_NFTS_BY_OWNER } from '@/queries/nftQueries';
 
-const page = () => {
+const Page = () => {
 
     const chainId = useChainId();
     const { address } = useAccount();
@@ -40,4 +37,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Page;
