@@ -21,22 +21,22 @@ const SORT_TYPES = {
     };
   }
 
-  async function getSortedCollections(orderBy, orderDirection) {
+  async function getSortedCollections(orderBy, orderDirection, chainId) {
     try {
       const { isValid } = validateSortParams(orderBy, orderDirection);
       if (!isValid) return [];
 
-      return await getBasicSortedCollections(orderBy, orderDirection);
+      return await getBasicSortedCollections(orderBy, orderDirection, chainId);
     } catch (error) {
       console.error('Error in getSortedCollections:', error);
       return [];
     }
   }
   
-  async function getBasicSortedCollections(orderBy, orderDirection) {
+  async function getBasicSortedCollections(orderBy, orderDirection, chainId) {
     const sortDirection = orderDirection === 'asc' ? 1 : -1;
     
-    return await collectionModel.find()
+    return await collectionModel.find({ chainId })
       .sort({ [orderBy]: sortDirection })
       .exec();
   }
@@ -45,17 +45,17 @@ const SORT_TYPES = {
 
 export const collectionResolvers = {
     Query: {
-        collections: async (_, { orderBy, orderDirection }, { dataSources }) => {
-            return await getSortedCollections(orderBy, orderDirection)
+        collections: async (_, { orderBy, orderDirection, chainId }, { dataSources }) => {
+            return await getSortedCollections(orderBy, orderDirection, chainId)
 
         },
         collection: async (_, { id }, { dataSources }) => {
             return collectionModel.findById(id)
             
         },
-        getCollectionsByOwner: async (_, { ownerAddress }, { dataSources }) => {
+        getCollectionsByOwner: async (_, { ownerAddress, chainId }, { dataSources }) => {
             try {
-              return await collectionModel.find({ ownerAddress });
+              return await collectionModel.find({ ownerAddress, chainId });
             } catch (error) {
               console.error("Error fetching collections by owner:", error);
               throw new Error("Unable to fetch collections for the specified owner");

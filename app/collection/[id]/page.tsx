@@ -19,9 +19,13 @@ import { useToastify } from '@/hooks/useToastify';
 import { useErrorPopup } from '@/hooks/useErrorPopup';
 import { ErrorPopup } from '@/components/popups/ErrorPopup';
 
+interface PageProps {
+    params: {
+        id: string;
+    }
+}
 
-
-const page: React.FC = ({ params }) => {
+const page: React.FC<PageProps> = ({ params }) => {
 
 
     const { id } = params;

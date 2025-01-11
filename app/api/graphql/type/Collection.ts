@@ -16,9 +16,9 @@ export const CollectionType = gql`
     }
 
     extend type Query {
-        collections(orderBy: String!, orderDirection: String!): [Collection!]!
+        collections(orderBy: String!, orderDirection: String!, chainId: String!): [Collection!]!
         collection(id: ID!): Collection
-        getCollectionsByOwner(ownerAddress: String!): [Collection]
+        getCollectionsByOwner(ownerAddress: String!, chainId: String!): [Collection]
 
     }
 

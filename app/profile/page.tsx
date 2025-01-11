@@ -3,28 +3,24 @@ import { CollectionsGrid } from '@/components/CollectionsGrid';
 import MyNFTs from '@/components/MyNFTs';
 import { collections } from '@/data/sampleCollections';
 import { NFTs } from '../../data/sampleCollections';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_COLLECTIONS_BY_OWNER } from '@/queries/collectionQueries';
-import { useAccount } from 'wagmi';
+import { useAccount, useChainId } from 'wagmi';
 import { GET_NFTS_BY_OWNER } from '@/queries/nftQueries';
 
 const page = () => {
-    // lets assume this element is my only collection
-    // const contractAddress = '0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D';
-    // const collection = collections.filter(
-    //     (c) => c.contractAddress === contractAddress
-    // );
-    // console.log(collection);
+
+    const chainId = useChainId();
     const { address } = useAccount();
 
     const { loading, error, data } = useQuery(GET_COLLECTIONS_BY_OWNER, {
-        variables: { ownerAddress: address },
+        variables: { ownerAddress: address, chainId: String(chainId) },
         skip: !address, // Skip query until address is available
     });
 
     const { loading: nftLoading, error: nftError, data: nftData } = useQuery(GET_NFTS_BY_OWNER, {
-        variables: { ownerAddress: address },
+        variables: { ownerAddress: address, chainId: String(chainId) },
         skip: !address, // Skip query until address is available
     });
 

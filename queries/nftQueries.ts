@@ -36,8 +36,8 @@ export const GET_NFT = gql`
 
 export const GET_NFTS_BY_OWNER = gql`
 
-    query GetNftsByOwner($ownerAddress: String!) {
-        getNftsByOwner(ownerAddress: $ownerAddress) {
+    query GetNftsByOwner($ownerAddress: String!, $chainId: String!) {
+        getNftsByOwner(ownerAddress: $ownerAddress, chainId: $chainId) {
             id
             chainId
             name

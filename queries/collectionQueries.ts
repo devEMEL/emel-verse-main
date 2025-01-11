@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_COLLECTIONS = gql`
-    query getCollections ($orderBy: String!, $orderDirection: String!) {
-        collections(orderBy: $orderBy, orderDirection: $orderDirection) {
+    query getCollections ($orderBy: String!, $orderDirection: String!, $chainId: String!) {
+        collections(orderBy: $orderBy, orderDirection: $orderDirection, chainId: $chainId) {
             id
             chainId
             name
@@ -38,8 +38,8 @@ export const GET_COLLECTION = gql`
 
 export const GET_COLLECTIONS_BY_OWNER = gql`
 
-    query GetCollectionsByOwner($ownerAddress: String!) {
-        getCollectionsByOwner(ownerAddress: $ownerAddress) {
+    query GetCollectionsByOwner($ownerAddress: String!, $chainId: String!) {
+        getCollectionsByOwner(ownerAddress: $ownerAddress, chainId: $chainId) {
             id
             chainId
             name

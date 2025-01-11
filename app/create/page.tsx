@@ -79,11 +79,11 @@ const page: React.FC = () => {
         setLoadingMessage("Deploying Collection...")
         // create contract obj
         const contract = new ethers.Contract(
-            NFTCollectionFactory.network[0].address,
+            NFTCollectionFactory.network[2].address,
             NFTCollectionFactory.abi,
             signer
         );
-        console.log(NFTCollectionFactory.network[0].address)
+        console.log(NFTCollectionFactory.network[2].address)
         // make txn
         const tx = await contract.createCollection(
             name,

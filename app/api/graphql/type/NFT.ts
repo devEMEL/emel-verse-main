@@ -17,7 +17,7 @@ export const NFTType = gql`
     extend type Query {
         nfts: [NFT!]!
         nft(id: ID!): NFT
-        getNftsByOwner(ownerAddress: String!): [NFT]
+        getNftsByOwner(ownerAddress: String!, chainId: String!): [NFT]
     }
 
     extend type Mutation {

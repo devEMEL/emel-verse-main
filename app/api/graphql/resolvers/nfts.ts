@@ -10,9 +10,9 @@ export const nftResolvers = {
         nft: async (_, { id }, { dataSources }) => {
             return nftModel.findById(id)
         },
-        getNftsByOwner: async (_, { ownerAddress }, { dataSources }) => {
+        getNftsByOwner: async (_, { ownerAddress, chainId }, { dataSources }) => {
             try {
-              return await nftModel.find({ ownerAddress });
+              return await nftModel.find({ ownerAddress, chainId });
             } catch (error) {
               console.error("Error fetching nfts by owner:", error);
               throw new Error("Unable to fetch nfts for the specified owner");

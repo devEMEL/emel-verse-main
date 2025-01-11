@@ -5,12 +5,15 @@ import CollectionSort from './CollectionSort';
 import { CollectionsGrid } from './CollectionsGrid';
 import { useQuery } from '@apollo/client';
 import { GET_COLLECTIONS } from '@/queries/collectionQueries';
+import { useChainId } from 'wagmi';
 
 const CollectionsPage = () => {
+
+    const chainId = useChainId();
     const [activeSort, setActiveSort] = useState('name');
     const [orderDirection, setOrderDirection] = useState('asc');
     const { loading, data, error, refetch } = useQuery(GET_COLLECTIONS, { 
-        variables: { orderBy: activeSort, orderDirection }
+        variables: { orderBy: activeSort, orderDirection, chainId: String(chainId) }
     });
 
     const handleSort = (sortType: any) => {
