@@ -4,12 +4,12 @@ const Hero = () => {
     const networks = [
         {
             icon: <Workflow className="w-6 h-6" />,
-            name: 'Mitosis Org',
+            name: 'Monad Devnet',
         },
-        {
-            icon: <Network className="w-6 h-6" />,
-            name: 'Arbitrum Sepolia',
-        },
+        // {
+        //     icon: <Network className="w-6 h-6" />,
+        //     name: 'Arbitrum Sepolia',
+        // },
     ];
 
     return (
