@@ -267,7 +267,7 @@ const page: React.FC = () => {
                     </div>
 
                     <FormInput
-                        label="Price (ETH)"
+                        label="Price (MON)"
                         type="number"
                         id="price"
                         value={formData.price}

@@ -53,7 +53,7 @@ export const CollectionCard: React.FC<CollectionCardProps> = ({
                         {formatRelativeTime(collection.createdAt)}
                     </p>
                     <p className="text-sm font-medium text-white">
-                        {weiToEther(String(collection.price))} ETH
+                        {weiToEther(String(collection.price))} MON
                     </p>
                 </div>
             </Link>
