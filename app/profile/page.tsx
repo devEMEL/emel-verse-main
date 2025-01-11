@@ -27,12 +27,15 @@ const Page = () => {
 
     if (nftLoading) return <p>Loading...</p>; // Loading Spinner
     if (nftError) return <p>Error : {nftError.message}</p>
+    if(!data || !nftData) {
+        return <p>No data available</p>
+    }
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Your collections grid/list will go here */}
-            <CollectionsGrid title="My Collections" collections={data.getCollectionsByOwner} />
-            <MyNFTs title="My NFTs" NFTs={nftData.getNftsByOwner} />
+            <CollectionsGrid title="My Collections" collections={data?.getCollectionsByOwner} />
+            <MyNFTs title="My NFTs" NFTs={nftData?.getNftsByOwner} />
         </div>
     );
 };
