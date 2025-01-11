@@ -1,6 +1,6 @@
 import { ethers} from 'ethers';
 
-import { FileObject, PinataSDK } from 'pinata';
+import { FileObject, PinataSDK } from 'pinata-web3';
 
 const IMAGE_SAMPLE =
     'https://maroon-major-crawdad-175.mypinata.cloud/ipfs/bafkreiaiqqqnwyvi5gksqfwsqihdt7izf5fklnbehal7elyusducquwq6i';
