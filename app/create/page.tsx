@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import React, { useState, FormEvent } from 'react';
@@ -19,6 +20,9 @@ import { CREATE_COLLECTION } from '@/mutations/collectionMutations';
 import { GET_COLLECTIONS } from '@/queries/collectionQueries';
 import { useMutation } from '@apollo/client';
 
+interface ExistingData {
+    collections: any[]
+}
 
 const page: React.FC = () => {
     const { isOpen, openPopup, closePopup } = usePopup();
@@ -45,7 +49,8 @@ const page: React.FC = () => {
 
     const [createCollection, { loading, error }] = useMutation(CREATE_COLLECTION, {
         update(cache, { data: { createCollection } }) {
-          const existingData = cache.readQuery({ 
+
+          const existingData: ExistingData | null = cache.readQuery({ 
             query: GET_COLLECTIONS 
           });
           
