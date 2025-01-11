@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { configDotenv } from 'dotenv';
+configDotenv();
 
 const IMAGE_SAMPLE = 'path/to/your/sample/image.jpg'; // Replace with your sample image path
 
@@ -18,13 +20,13 @@ export function useImageLoader(imageURI: string) {
           return;
         }
 
-        // const src = imageURI.includes('//')
-        //   ? `https://maroon-major-crawdad-175.mypinata.cloud/ipfs/${imageURI.split('//')[1]}`
-        //   : IMAGE_SAMPLE;
-
         const src = imageURI.includes('//')
-          ? `https://maroon-major-crawdad-175.mypinata.cloud/ipfs/${imageURI.split('//')[1]}/?pinataGatewayToken=${process.env.GATEWAY_KEY}`
+          ? `https://maroon-major-crawdad-175.mypinata.cloud/ipfs/${imageURI.split('//')[1]}`
           : IMAGE_SAMPLE;
+
+        // const src = imageURI.includes('//')
+        //   ? `https://maroon-major-crawdad-175.mypinata.cloud/ipfs/${imageURI.split('//')[1]}/?pinataGatewayToken=${process.env.GATEWAY_KEY}`
+        //   : IMAGE_SAMPLE;
 
 
         // const src = imageURI.includes('//')
