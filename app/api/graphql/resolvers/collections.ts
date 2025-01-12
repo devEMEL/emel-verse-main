@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { collectionModel } from '@/models/Collection';
+import { normalizeScientificNotation } from '@/utils';
 
 
 const SORT_TYPES = {
@@ -65,6 +66,7 @@ export const collectionResolvers = {
     Mutation: {
         createCollection: async (_, args, { dataSources }) => {
 
+            const priceInWei = BigInt(normalizeScientificNotation(args.price)).toString();
             const collection = new collectionModel({
                 _id: args.id,
                 chainId: args.chainId,
@@ -73,7 +75,7 @@ export const collectionResolvers = {
                 description: args.description,
                 ownerAddress: args.ownerAddress,
                 createdAt: args.createdAt,
-                price: args.price,
+                price: priceInWei,
                 imageUrl: args.imageUrl,
                 totalSupply: args.totalSupply,
                 mintedAmount: args.mintedAmount,

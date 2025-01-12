@@ -59,3 +59,16 @@ export const getTokenURI = async (metadata: object) => {
     const upload = await pinata.upload.json(metadata);
     return `ipfs://${upload.IpfsHash}`;
 };
+
+export const normalizeScientificNotation = (value: string | number): string => {
+    // Convert to string and handle scientific notation
+    const str = value.toString();
+    if (str.includes('e')) {
+      const [base, exponent] = str.split('e');
+      const exp = parseInt(exponent);
+      if (exp > 0) {
+        return base.replace('.', '') + '0'.repeat(exp - (base.length - base.indexOf('.') - 1));
+      }
+    }
+    return str;
+  }

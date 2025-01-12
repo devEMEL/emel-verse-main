@@ -7,7 +7,7 @@ import { FormTextArea } from '@/components/forms/FormTextArea';
 import { ImagePreview } from '@/components/forms/ImagePreview';
 import { usePopup } from '@/hooks/usePopup';
 import { SuccessPopup } from '@/components/popups/SuccessPopup';
-import { etherToWei, getImageURI } from '@/utils';
+import { etherToWei, getImageURI, normalizeScientificNotation } from '@/utils';
 import { useErrorPopup } from '@/hooks/useErrorPopup';
 import { ErrorPopup } from '@/components/popups/ErrorPopup';
 import { useToastify } from '@/hooks/useToastify';
@@ -114,14 +114,14 @@ const page: React.FC = () => {
             description: events[0].args[3],
             creator: events[0].args[4],
             createdAt: Number(String(events[0].args[5])),
-            price: Number(String(events[0].args[6])),
+            price: BigInt(String(events[0].args[6])),
             maxSupply: Number(String(events[0].args[7])),
             imageURI: events[0].args[8],
             mintedAmount: 0,
         };
         console.log({eventObj});
         // make createcollection request (push to db)
-        await createCollection({variables: {id: eventObj.contractAddress, chainId: String(chainId), name: String(eventObj.name), symbol: String(eventObj.symbol), description: String(eventObj.description), ownerAddress: String(eventObj.creator), createdAt: String(eventObj.createdAt), price: String(eventObj.price), imageUrl: String(eventObj.imageURI), totalSupply: String(eventObj.maxSupply), mintedAmount: String(eventObj.mintedAmount)}})
+        await createCollection({variables: {id: eventObj.contractAddress, chainId: String(chainId), name: String(eventObj.name), symbol: String(eventObj.symbol), description: String(eventObj.description), ownerAddress: String(eventObj.creator), createdAt: String(eventObj.createdAt), price: normalizeScientificNotation(String(eventObj.price)), imageUrl: String(eventObj.imageURI), totalSupply: String(eventObj.maxSupply), mintedAmount: String(eventObj.mintedAmount)}})
 
         return {
             name: eventObj.name,
