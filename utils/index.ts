@@ -7,9 +7,8 @@ const IMAGE_SAMPLE =
 
 const pinata = new PinataSDK({
     pinataJwt: process.env.NEXT_PUBLIC_PINATA_JWT,
-    pinataGateway: 'maroon-major-crawdad-175.mypinata.cloud',
+    pinataGateway: 'https://ipfs.io',
 });
-
 
 export const truncateAddress = (
     address: string,
