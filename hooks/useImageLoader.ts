@@ -21,8 +21,12 @@ export function useImageLoader(imageURI: string) {
         }
 
         const src = imageURI.includes('//')
-          ? `https://maroon-major-crawdad-175.mypinata.cloud/ipfs/${imageURI.split('//')[1]}`
+          ? ` https://ipfs.io/ipfs/${imageURI.split('//')[1]}`
           : IMAGE_SAMPLE;
+        
+        //   const src = imageURI.includes('//')
+        //   ? `https://maroon-major-crawdad-175.mypinata.cloud/ipfs/${imageURI.split('//')[1]}`
+        //   : IMAGE_SAMPLE;
 
         // const src = imageURI.includes('//')
         //   ? `https://maroon-major-crawdad-175.mypinata.cloud/ipfs/${imageURI.split('//')[1]}/?pinataGatewayToken=${process.env.GATEWAY_KEY}`
