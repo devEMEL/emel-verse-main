@@ -226,7 +226,7 @@ export const MintButton: React.FC<MintButtonProps> = ({
             className="w-full bg-white text-black font-bold py-4 px-8 rounded-lg hover:bg-white/90 disabled:bg-white/50 disabled:cursor-not-allowed transition-colors flex justify-center"
         >
             
-            {address ? `Mint for ${weiToEther(String(collection.price))} ETH` : <ConnectButton />}
+            {address ? `Mint for ${weiToEther(String(collection.price))} MON` : <ConnectButton />}
         </button>
         </div>
         

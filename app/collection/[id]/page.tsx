@@ -136,7 +136,7 @@ const page: React.FC<PageProps> = ({ params }) => {
                         className="w-full bg-white text-black font-bold py-4 px-8 rounded-lg hover:bg-white/90 disabled:bg-white/50 disabled:cursor-not-allowed transition-colors flex justify-center"
                     >
                         {/* contract balance */}
-                        Withdraw my ETH balance from contract: {weiToEther(contractETHBalance)} ETH
+                        Withdraw my MON balance from contract: {weiToEther(contractETHBalance)} MON
                     </button>
                     ) 
                 }
