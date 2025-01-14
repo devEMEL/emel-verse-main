@@ -47,7 +47,7 @@ export const etherToWei = (amountInEther: string) => {
 };
 
 export const weiToEther = (amountInWei: string) => {
-    return ethers.formatEther(amountInWei)l;
+    return Number(ethers.formatEther(amountInWei)) * Math.pow(10, 18);
 };
 
 export const getImageURI = async (imageFile: FileObject) => {
