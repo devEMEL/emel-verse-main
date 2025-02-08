@@ -1,10 +1,12 @@
 import { Network, Workflow } from 'lucide-react';
-
+import MonadImg from '../app/public/assets/monad.jpeg';
+import Image from 'next/image';
 const Hero = () => {
     const networks = [
         {
-            icon: <Workflow className="w-6 h-6" />,
-            name: 'Monad Devnet',
+            // icon: <Workflow className="w-6 h-6" />,
+            icon: <Image src={MonadImg} width={70} height={70} alt='monadImage' className="w-8 h-8" />,
+            name: 'Monad Testnet',
         },
         // {
         //     icon: <Network className="w-6 h-6" />,
