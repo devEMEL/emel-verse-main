@@ -66,7 +66,7 @@ export const MintButton: React.FC<MintButtonProps> = ({
     const provider = useEthersProvider();
     const signer = useEthersSigner();
     const { address } = useAccount();
-    const chainId = useChainId()
+    const chainId = 10143;
 
     const [createNFT, { loading, error }] = useMutation(CREATE_NFT, {
         update(cache, { data: { createNFT } }) {

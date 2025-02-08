@@ -8,7 +8,7 @@ import { GET_NFTS_BY_OWNER } from '@/queries/nftQueries';
 
 const Page = () => {
 
-    const chainId = useChainId();
+    const chainId = 10143;
     const { address } = useAccount();
 
     const { loading, error, data } = useQuery(GET_COLLECTIONS_BY_OWNER, {

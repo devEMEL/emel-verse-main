@@ -9,9 +9,9 @@ import { useChainId } from 'wagmi';
 
 const CollectionsPage = () => {
 
-    const chainId = useChainId();
-    const [activeSort, setActiveSort] = useState('name');
-    const [orderDirection, setOrderDirection] = useState('asc');
+    const chainId = 10143;
+    const [activeSort, setActiveSort] = useState('createdAt');
+    const [orderDirection, setOrderDirection] = useState('desc');
     const { loading, data, error, refetch } = useQuery(GET_COLLECTIONS, { 
         variables: { orderBy: activeSort, orderDirection, chainId: String(chainId) }
     });

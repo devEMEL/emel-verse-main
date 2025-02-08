@@ -45,7 +45,7 @@ const page: React.FC = () => {
     const provider = useEthersProvider();
     const signer = useEthersSigner();
 
-    const chainId = useChainId();
+    const chainId = 10143;
 
     const [createCollection, { loading, error }] = useMutation(CREATE_COLLECTION, {
         update(cache, { data: { createCollection } }) {
