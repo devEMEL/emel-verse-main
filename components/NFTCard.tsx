@@ -32,7 +32,7 @@ const NFTCard: React.FC<NFTProps> = ({ nft }) => {
                 />
                 <div className="p-4">
                     <h3 className="text-lg font-semibold mb-2 text-white">
-                        {nft.name}
+                        {nft.name} #{nft.tokenId}
                     </h3>
                     <h3 className="text-lg font-semibold mb-2 text-white">
                         {nft.symbol}
