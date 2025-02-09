@@ -7,9 +7,9 @@ const Footer = () => {
                 <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
                     {/* Main Nav */}
                     <div className="space-y-4">
-                        <h3 className="text-white font-semibold text-lg">
+                        {/* <h3 className="text-white font-semibold text-lg">
                             Navigation
-                        </h3>
+                        </h3> */}
                         <ul className="space-y-2">
                             <li>
                                 <Link
@@ -58,43 +58,52 @@ const Footer = () => {
 
                     {/* Legal */}
                     <div className="space-y-4">
-                        <h3 className="text-white font-semibold text-lg">
+                        {/* <h3 className="text-white font-semibold text-lg">
                             Legal
-                        </h3>
+                        </h3> */}
                         <ul className="space-y-2">
                             <li>
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/terms-service"
                                     className="text-zinc-400 hover:text-white transition-colors"
                                 >
                                     Terms of Service
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
+                            <Link
+                                    href="/privacy-policy"
                                     className="text-zinc-400 hover:text-white transition-colors"
                                 >
-                                    Privacy Policy
-                                </a>
+                                      Privacy Policy
+                                </Link>
                             </li>
                         </ul>
                     </div>
 
                     {/* Community */}
                     <div className="space-y-4">
-                        <h3 className="text-white font-semibold text-lg">
+                        {/* <h3 className="text-white font-semibold text-lg">
                             Community
-                        </h3>
+                        </h3> */}
                         <div className="flex space-x-4">
+                        <a
+                                href="https://emelverse.gitbook.io/emelverse"
+                                target='blank'
+                                className="text-zinc-400 hover:text-white transition-colors p-2 rounded-full hover:bg-zinc-800/50"
+                            >
+                                Docs
+                            </a>
                             <a
-                                href="#"
+                                href="https://x.com/emelverse"
+                                target='blank'
                                 className="text-zinc-400 hover:text-white transition-colors p-2 rounded-full hover:bg-zinc-800/50"
                             >
                                 Twitter
                             </a>
                             <a
-                                href="#"
+                                href="https://discord.gg/QRwzRQNZrr"
+                                target='blank'
                                 className="text-zinc-400 hover:text-white transition-colors p-2 rounded-full hover:bg-zinc-800/50"
                             >
                                 Discord

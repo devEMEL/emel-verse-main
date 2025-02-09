@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+### EmelVerse
 
-First, run the development server:
+Overview
+
+EmelVerse is a dynamic platform designed to celebrate creativity and digital expression. Whether you're an artist, collector, or enthusiast, EmelVerse offers a space to explore unique digital assets in a vibrant and ever-evolving ecosystem. Dive into a world of endless possibilities and discover a new dimension of creativity. 
+
+
+####  Installation & Setup
+
+##### Prerequisites
+
+Node.js (>=16.x)
+Yarn or npm
+
+
+
+##### Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/devEMEL/emel-verse-main
+cd your-dapp
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##### Install Dependencies
+```bash
+yarn install
+# or
+npm install
+```
+##### Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create a .env.local file and add:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+MONGODB_CONNECTION_STRING=<Your MongoDB Connection String>
+MONGODB_PASSWORD=<Your MongoDB password>
+NEXT_PUBLIC_PINATA_JWT=<Your IPFS JWT>
+```
 
-## Learn More
+##### Run Locally
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn dev
+# or
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Visit http://localhost:3000 in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Check out our [documentation](https://emelverse.gitbook.io/emelverse) for more details.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatRelativeTime, truncateAddress, weiToEther } from '../utils/index';
+import Link from 'next/link';
 
 interface CollectionStatsProps {
     contractAddress: string;
@@ -25,7 +26,8 @@ export const CollectionStats: React.FC<CollectionStatsProps> = ({
                     Contract Address
                 </h3>
                 <p className="text-white font-mono">
-                    {truncateAddress(contractAddress)}
+                    <Link href={`https://testnet.monadexplorer.com/address/${contractAddress}`}  target='blank'>{truncateAddress(contractAddress)}</Link>
+                    
                 </p>
             </div>
             <div className="bg-black/80 p-4 rounded-lg">
@@ -33,7 +35,7 @@ export const CollectionStats: React.FC<CollectionStatsProps> = ({
                     Owner Address
                 </h3>
                 <p className="text-white font-mono">
-                    {truncateAddress(ownerAddress)}
+                <Link  href={`https://testnet.monadexplorer.com/address/${ownerAddress}`}  target='blank'>{truncateAddress(ownerAddress)}</Link>
                 </p>
             </div>
             <div className="bg-black/80 p-4 rounded-lg">

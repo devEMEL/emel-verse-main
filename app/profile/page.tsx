@@ -8,7 +8,7 @@ import { GET_NFTS_BY_OWNER } from '@/queries/nftQueries';
 
 const Page = () => {
 
-    const chainId = useChainId();
+    const chainId = 10143;
     const { address } = useAccount();
 
     const { loading, error, data } = useQuery(GET_COLLECTIONS_BY_OWNER, {
@@ -34,6 +34,10 @@ const Page = () => {
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Your collections grid/list will go here */}
+            <div className='text-2xl font-bold mb-8 px-4 text-gray-600'>
+                Activity
+                {/* when u click activity, it will open up the content ^ */}
+            </div>
             <CollectionsGrid title="My Collections" collections={data?.getCollectionsByOwner} />
             <MyNFTs title="My NFTs" NFTs={nftData?.getNftsByOwner} />
         </div>
