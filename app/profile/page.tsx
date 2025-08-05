@@ -44,7 +44,7 @@ const Page = () => {
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Image</th>
               <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">CA</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Minted</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
